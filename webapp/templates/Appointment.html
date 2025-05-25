@@ -1,0 +1,73 @@
+{% extends "base.html" %}
+{% block content %}
+
+<!-- Smooth scrolling -->
+<style>
+  html {
+    scroll-behavior: smooth;
+  }
+
+  .hero-bg {
+    background-image: linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5)),
+      url('https://firebasestorage.googleapis.com/v0/b/twinbrook-12f84.appspot.com/o/output.jpg?alt=media&token=d9a48998-aed9-42a4-88c0-85ce07c54b3c');
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+  }
+</style>
+
+<!-- Hero Section -->
+<section class="hero-bg min-h-screen flex items-center justify-center relative">
+  <div class="absolute inset-0 bg-gradient-to-r from-blue-900/60 to-orange-900/60"></div>
+  <div class="relative z-10 max-w-6xl mx-auto px-4 text-center">
+    <h1 class="text-4xl md:text-6xl font-bold text-white mb-4">Your Health Journey Starts Here</h1>
+    <p class="text-xl md:text-2xl text-white/90 mb-10">Simplify your healthcare – from booking to medication, all online.</p>
+
+    <!-- Steps Overview -->
+    <div x-data="{ currentStep: 0, steps: [
+        { title: 'Book Appointment', description: 'Schedule online with our qualified doctors.' },
+        { title: 'Virtual Consultation', description: 'Secure video call with a medical professional.' },
+        { title: 'Get Prescription', description: 'Digital prescription sent to your inbox.' },
+        { title: 'Order Medication', description: 'Fast home delivery of your medication.' }
+      ] }" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 mb-10">
+      <template x-for="(step, index) in steps" :key="index">
+        <div 
+          class="bg-white/10 backdrop-blur-sm rounded-xl p-6 border border-white/30 text-white hover:bg-white/20 transition-all duration-300 cursor-pointer"
+          :class="{ 'ring-2 ring-yellow-400': currentStep === index }"
+          @click="currentStep = index">
+          <div class="w-12 h-12 bg-yellow-400 text-black font-bold rounded-full flex items-center justify-center mx-auto mb-4" x-text="index + 1"></div>
+          <h3 class="font-semibold text-lg mb-2" x-text="step.title"></h3>
+          <p class="text-sm opacity-80" x-text="step.description"></p>
+        </div>
+      </template>
+    </div>
+
+    <!-- Scroll Button -->
+    <a href="#calendar" class="inline-block bg-yellow-400 hover:bg-yellow-300 text-black font-semibold px-8 py-4 rounded-lg text-lg shadow-lg transform hover:scale-105 transition">
+      Start Your Health Journey
+    </a>
+  </div>
+</section>
+
+<!-- Appointment Booking Section -->
+<section id="calendar" class="text-center py-20 px-6 bg-gradient-to-b from-white to-blue-50">
+  <h2 class="text-4xl md:text-5xl font-bold mb-4 text-blue-800">
+    Book Your Medical Appointment
+  </h2>
+  <p class="text-lg md:text-xl max-w-2xl mx-auto text-gray-600 mb-12">
+    Choose a time that works for you and get expert care from certified professionals.
+  </p>
+
+  <div class="flex justify-center">
+    <div class="w-full max-w-4xl bg-white shadow-xl rounded-2xl overflow-hidden p-4">
+      <div
+        class="calendly-inline-widget"
+        data-url="https://calendly.com/douglas-luzinda/professional-medical-consultation"
+        style="min-width:320px;height:630px;">
+      </div>
+      <script type="text/javascript" src="https://assets.calendly.com/assets/external/widget.js" async></script>
+    </div>
+  </div>
+</section>
+
+{% endblock %}

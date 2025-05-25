@@ -1,0 +1,60 @@
+# Python cache files
+__pycache__/
+*.py[cod]
+*$py.class
+
+# Django database file (if using SQLite)
+db.sqlite3
+*.sqlite3
+
+# Django migration files (optional if you prefer to regenerate)
+**/migrations/*.py
+!**/migrations/__init__.py
+
+# Environment variables
+.env
+.env.*
+
+# Virtual environment
+venv/
+env/
+ENV/
+.venv/
+
+# VS Code settings
+.vscode/
+
+# Mac/Linux system files
+.DS_Store
+
+# PyCharm files
+.idea/
+
+# Logs
+*.log
+
+# Static and media (only if dynamically generated or stored in cloud)
+staticfiles/
+media/
+
+# Coverage reports
+htmlcov/
+.coverage
+coverage.xml
+*.cover
+.cache
+
+# Testing files
+.pytest_cache/
+nosetests.xml
+test.db
+
+# Node modules (if you're using npm/yarn with Django frontend)
+node_modules/
+
+# Compiled files
+*.mo
+*.pot
+
+# Local settings
+local_settings.py

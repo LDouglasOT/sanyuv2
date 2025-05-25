@@ -1,0 +1,174 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="cupcake">
+<head>
+  <link href="https://db.onlinewebfonts.com/c/5a735ad00cad6dab35cc9f3910e9fc65?family=MTN+Brighter+Sans+Light" rel="stylesheet">
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Sanyu Hospital</title>
+  <link href="https://cdn.jsdelivr.net/npm/daisyui@4.4.18/dist/full.css" rel="stylesheet" />
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script>
+    tailwind.config = {
+      theme: {
+        extend: {
+          colors: {
+            primary: '#1e7f3f',     // Sanyu green
+            secondary: '#e5f4ec',   // light green background
+          }
+        }
+      }
+    }
+  </script>
+  <style>
+
+    /* For WebKit browsers (Chrome, Safari, Edge) */
+::-webkit-scrollbar {
+  width: 8px;           /* make scrollbar thin */
+  background-color: #f0fdf4;  /* light green-ish background behind scrollbar */
+}
+
+::-webkit-scrollbar-thumb {
+  background-color: #22c55e;  /* green thumb */
+  border-radius: 4px;
+}
+
+/* For Firefox */
+* {
+  scrollbar-width: thin;
+  scrollbar-color: #22c55e #f0fdf4; /* thumb color and track color */
+}
+
+
+    @font-face {
+        font-family: "MTN Brighter Sans Light";
+        src: url("https://db.onlinewebfonts.com/t/5a735ad00cad6dab35cc9f3910e9fc65.eot");
+        src: url("https://db.onlinewebfonts.com/t/5a735ad00cad6dab35cc9f3910e9fc65.eot?#iefix") format("embedded-opentype"),
+             url("https://db.onlinewebfonts.com/t/5a735ad00cad6dab35cc9f3910e9fc65.woff2") format("woff2"),
+             url("https://db.onlinewebfonts.com/t/5a735ad00cad6dab35cc9f3910e9fc65.woff") format("woff"),
+             url("https://db.onlinewebfonts.com/t/5a735ad00cad6dab35cc9f3910e9fc65.ttf") format("truetype"),
+             url("https://db.onlinewebfonts.com/t/5a735ad00cad6dab35cc9f3910e9fc65.svg#MTN Brighter Sans Light") format("svg");
+    }
+
+    /* Apply the font globally */
+    body {
+        font-family: "MTN Brighter Sans Light", sans-serif;
+    }
+</style>
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" integrity="sha512-..." crossorigin="anonymous" referrerpolicy="no-referrer" />
+
+</head>
+<body  class="bg-white">
+<div class="flex mx-1 items-center py-2 justify-between">
+  <div class="flex items-center justify-start">
+<img height="60" width="60" src="data:image/jpeg;base64,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" 
+alt=" Sanyu hospital Logo">
+<h1><span class="text-teal-600 text-3xl font-bold">sanyu</span><br><span class="text-sm text-teal-600">hospital</span></h1>
+  </div>
+
+
+<ul class="flex cursor-pointer gap-5 items-center text-slate-800 justify-between">
+  <li class="cursor-pointer">
+    <a href="{% url 'index' %}">Home</a>
+  </li>
+  <li class="cursor-pointer">
+    <a href="{% url 'events' %}">Events</a>
+    
+  </li>
+  <li class="cursor-pointer">
+     <a href="{% url 'appointment' %}">Appointments</a>
+    
+  </li>
+  <li class="cursor-pointer">
+     <a href="{% url 'donate' %}">Donate</a>
+    </li>
+  <li class="cursor-pointer">
+     <a href="{% url 'about' %}">About</a>
+    </li>
+  <li class="cursor-pointer">
+     <a href="{% url 'contact' %}">Contact</a>
+    </li>
+</ul>
+<a href="{% url 'calls' %}" class="px-4 py-2 text-sm rounded-lg bg-teal-700 text-white">Request A Call</a>
+</div>
+
+
+
+{% block content %}{% endblock %}
+
+
+
+
+<footer class="bg-gradient-to-r from-teal-800 via-teal-700 to-teal-600 text-white py-10 px-6 md:px-20">
+  <div class="grid grid-cols-1 md:grid-cols-4 gap-8 text-sm">
+    
+    <!-- Branding & Description -->
+    <div>
+      <div class="flex items-center gap-2 mb-4">
+        <div class="bg-white p-2 rounded-full">
+          <img src="https://img.icons8.com/color/48/000000/hospital.png" class="h-6 w-6" alt="Logo" />
+        </div>
+        <h2 class="font-bold text-lg">Sanyu Hospital</h2>
+      </div>
+      <p class="text-white/90 mb-4">
+        We are dedicated to delivering quality maternal and general healthcare to our community with compassion and innovation.
+      </p>
+      <div class="flex gap-3">
+        <a href="#" class="hover:text-pink-300"><img src="https://img.icons8.com/color/24/instagram-new.png" alt="Instagram" /></a>
+        <a href="#" class="hover:text-blue-300"><img src="https://img.icons8.com/color/24/linkedin.png" alt="LinkedIn" /></a>
+        <a href="#" class="hover:text-gray-300"><img src="https://img.icons8.com/ios-filled/24/ffffff/twitterx.png" alt="X" /></a>
+        <a href="#" class="hover:text-blue-400"><img src="https://img.icons8.com/color/24/facebook-new.png" alt="Facebook" /></a>
+      </div>
+    </div>
+
+    <!-- Quick Links -->
+    <div>
+      <h3 class="font-bold mb-3">Quick Links</h3>
+      <ul class="space-y-2 text-white/90">
+        <li><a href="#" class="hover:text-white">About Us</a></li>
+        <li><a href="#" class="hover:text-white">Departments</a></li>
+        <li><a href="#" class="hover:text-white">Appointments</a></li>
+      </ul>
+    </div>
+
+    <!-- Information -->
+    <div>
+      <h3 class="font-bold mb-3">Information</h3>
+      <ul class="space-y-2 text-white/90">
+        <li><a href="#" class="hover:text-white">Privacy Policy</a></li>
+        <li><a href="#" class="hover:text-white">Terms of Service</a></li>
+        <li><a href="#" class="hover:text-white">Support</a></li>
+      </ul>
+    </div>
+
+    <!-- Contact -->
+    <div>
+      <h3 class="font-bold mb-3">Contact</h3>
+      <ul class="space-y-2 text-white/90">
+        <li class="flex items-start gap-2">
+          <svg class="w-5 h-5 mt-1" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17.657 16.657L13.414 12.414a4 4 0 00-5.657 0l-4.95 4.95a11 11 0 1015.556-15.556l-4.95 4.95a4 4 0 000 5.657l4.243 4.243z" />
+          </svg>
+          <span>Kampala Road, 5th Floor, Sanyu Building</span>
+        </li>
+        <li class="flex items-center gap-2">
+          <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M16 12H8m8 0a4 4 0 10-8 0 4 4 0 008 0zm-2 4h-4a4 4 0 00-4 4v1h12v-1a4 4 0 00-4-4z" />
+          </svg>
+          <span>info@sanyuhospital.org</span>
+        </li>
+        <li class="flex items-center gap-2">
+          <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 5h2l3.6 7.59-1.35 2.45A1 1 0 008 17h12a1 1 0 001-1v-1H6.42a.5.5 0 01-.42-.25L5 13h14l1 2H8l1.1-2H3V5z" />
+          </svg>
+          <span>+256 701 234 567</span>
+        </li>
+      </ul>
+    </div>
+
+  </div>
+</footer>
+
+</body>
+</html>
+<!--               Submit
+ -->

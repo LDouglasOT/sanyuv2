@@ -1,0 +1,97 @@
+{% extends "base.html" %}
+{% block content %}
+
+<!-- Hero Section: Upcoming Event -->
+<section class="bg-blue-900 text-white min-h-screen flex flex-col justify-center items-center px-6 py-20 text-center relative">
+  <h1 class="text-5xl font-bold mb-4">Upcoming Event</h1>
+  <p class="text-xl max-w-3xl mb-6">
+    Join us for our next medical outreach event — bringing healthcare to underserved communities.
+  </p>
+  <div class="bg-blue-700 rounded-lg p-8 max-w-xl w-full shadow-lg">
+    <h2 class="text-3xl font-semibold mb-2">Community Health Fair 2025</h2>
+    <p class="text-lg mb-2">Date: <strong>June 15, 2025</strong></p>
+    <p class="text-lg mb-4">Location: <strong>Sanyu Hospital Grounds</strong></p>
+    <p class="mb-6">
+      health consultations, Discounted treatment on next visit, nutrition advices, and more.
+    </p>
+    <button id="bookInvitationBtn" class="bg-yellow-400 text-black font-semibold px-6 py-3 rounded-lg hover:bg-yellow-300 transition">
+      Book Invitation
+    </button>
+  </div>
+</section>
+
+<!-- Booking Modal -->
+<div id="bookingModal" class="fixed inset-0 bg-black bg-opacity-70 flex items-center justify-center hidden z-50">
+  <div class="bg-white rounded-lg shadow-xl max-w-md w-full p-6 relative">
+    <button id="closeModalBtn" class="absolute top-3 right-3 text-gray-600 hover:text-black text-xl font-bold">&times;</button>
+    <h3 class="text-2xl font-bold mb-4">Book Your Invitation</h3>
+    <form method="POST" action="{% url 'book_event_invitation' %}" class="space-y-4">
+      {% csrf_token %}
+      <div>
+        <label for="name" class="block font-semibold mb-1">Full Name</label>
+        <input type="text" name="name" id="name" required class="w-full border border-gray-300 rounded px-3 py-2" />
+      </div>
+      <div>
+        <label for="email" class="block font-semibold mb-1">Email Address</label>
+        <input type="email" name="email" id="email" required class="w-full border border-gray-300 rounded px-3 py-2" />
+      </div>
+      <button type="submit" class="bg-blue-900 text-white px-6 py-3 rounded hover:bg-blue-800 transition w-full font-semibold">Send Invitation</button>
+    </form>
+  </div>
+</div>
+
+<!-- Past Events Videos -->
+<section class="py-20 px-6 max-w-7xl mx-auto">
+  <h2 class="text-4xl font-bold text-center text-blue-900 mb-12">Videos of Past Events</h2>
+  <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+    
+    <!-- Video 1 -->
+    <div class="rounded-lg overflow-hidden shadow-lg">
+      <iframe class="w-full h-56 md:h-64" src="https://www.youtube.com/embed/dQw4w9WgXcQ" title="Past Event Video 1" frameborder="0" allowfullscreen></iframe>
+      <div class="p-4 bg-white">
+        <h3 class="font-semibold text-lg text-blue-900 mb-1">Outreach Event 2024</h3>
+        <p class="text-gray-600">Highlights from our 2024 rural clinic outreach.</p>
+      </div>
+    </div>
+
+    <!-- Video 2 -->
+    <div class="rounded-lg overflow-hidden shadow-lg">
+      <iframe class="w-full h-56 md:h-64" src="https://www.youtube.com/embed/3JZ_D3ELwOQ" title="Past Event Video 2" frameborder="0" allowfullscreen></iframe>
+      <div class="p-4 bg-white">
+        <h3 class="font-semibold text-lg text-blue-900 mb-1">Health Education Workshop</h3>
+        <p class="text-gray-600">Community nutrition and wellness session.</p>
+      </div>
+    </div>
+
+    <!-- Video 3 -->
+    <div class="rounded-lg overflow-hidden shadow-lg">
+      <iframe class="w-full h-56 md:h-64" src="https://www.youtube.com/embed/V-_O7nl0Ii0" title="Past Event Video 3" frameborder="0" allowfullscreen></iframe>
+      <div class="p-4 bg-white">
+        <h3 class="font-semibold text-lg text-blue-900 mb-1">Mobile Clinic Outreach</h3>
+        <p class="text-gray-600">Serving remote villages with medical services.</p>
+      </div>
+    </div>
+
+  </div>
+</section>
+
+<script>
+  const modal = document.getElementById('bookingModal');
+  const openBtn = document.getElementById('bookInvitationBtn');
+  const closeBtn = document.getElementById('closeModalBtn');
+
+  openBtn.addEventListener('click', () => {
+    modal.classList.remove('hidden');
+  });
+  closeBtn.addEventListener('click', () => {
+    modal.classList.add('hidden');
+  });
+  // Optional: close modal on outside click
+  modal.addEventListener('click', e => {
+    if(e.target === modal) {
+      modal.classList.add('hidden');
+    }
+  });
+</script>
+
+{% endblock %}

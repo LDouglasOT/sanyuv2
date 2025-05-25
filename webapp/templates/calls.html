@@ -1,0 +1,76 @@
+{% extends "base.html" %}
+{% block content %}
+
+<!-- Smooth scrolling -->
+<style>
+  html {
+    scroll-behavior: smooth;
+  }
+
+  .hero-bg {
+    background-image: linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5)),
+      url('https://firebasestorage.googleapis.com/v0/b/twinbrook-12f84.appspot.com/o/pregnant.jpg?alt=media&token=d9546c39-35a8-43e8-8b10-aba086837fb3');
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+  }
+</style>
+
+<!-- Hero Section -->
+<section class="hero-bg min-h-screen flex items-center justify-center relative">
+  <div class="absolute inset-0 bg-gradient-to-r from-blue-900/60 to-orange-900/60"></div>
+  <div class="relative z-10 max-w-4xl mx-auto px-6 text-center">
+    <h1 class="text-4xl md:text-6xl font-bold text-white mb-4">Request a Call from a Medical Professional</h1>
+    <p class="text-xl text-white/90 mb-10">Let us call you at your convenience. It's quick, easy, and secure.</p>
+    <a href="#call-form" class="inline-block bg-yellow-400 hover:bg-yellow-300 text-black font-semibold px-8 py-4 rounded-lg text-lg shadow-lg transform hover:scale-105 transition">
+      Fill Request Form
+    </a>
+  </div>
+</section>
+
+<!-- Call Request Form Section -->
+<section id="call-form" class="py-20 px-6 bg-gradient-to-b from-white to-blue-50">
+  <div class="max-w-3xl mx-auto bg-white p-10 rounded-2xl shadow-xl">
+    <h2 class="text-3xl font-bold text-center mb-8 text-blue-900">Call Request Form</h2>
+    <form action="{% url 'submit_call_request' %}" method="POST" class="space-y-6">
+      {% csrf_token %}
+
+      <div>
+        <label class="block font-medium text-gray-700">Full Name</label>
+        <input type="text" name="name" required class="w-full mt-1 px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-400" placeholder="John Doe">
+      </div>
+
+      <div>
+        <label class="block font-medium text-gray-700">Phone Number</label>
+        <input type="tel" name="phone" required class="w-full mt-1 px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-400" placeholder="+256...">
+      </div>
+
+      <div>
+        <label class="block font-medium text-gray-700">Preferred Gender of Doctor</label>
+        <select name="preferred_gender" class="w-full mt-1 px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-400">
+          <option value="no_preference">No Preference</option>
+          <option value="male">Male</option>
+          <option value="female">Female</option>
+        </select>
+      </div>
+
+      <div>
+        <label class="block font-medium text-gray-700">Preferred Call Time</label>
+        <input type="datetime-local" name="preferred_time" required class="w-full mt-1 px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-400">
+      </div>
+
+      <div>
+        <label class="block font-medium text-gray-700">Additional Notes (Optional)</label>
+        <textarea name="message" rows="4" class="w-full mt-1 px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-400" placeholder="Tell us anything we should know..."></textarea>
+      </div>
+
+      <div class="text-center">
+        <button type="submit" class="bg-blue-600 text-white font-semibold px-8 py-3 rounded-lg hover:bg-blue-700 transition">
+          Submit Request
+        </button>
+      </div>
+    </form>
+  </div>
+</section>
+
+{% endblock %}
