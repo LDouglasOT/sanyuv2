@@ -1,6 +1,19 @@
+
+
+{% comment %} {% load static %}
+{% load i18n %}
+{% load humanize %} {% endcomment %}
 <!DOCTYPE html>
 <html lang="en" data-theme="cupcake">
 <head>
+  <link
+  rel="stylesheet"
+  href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css"
+  integrity="sha512-papQK1++qK3sJz7+sY+j2F+s6cHkH1VJG++ZVbx4sG+c1iD97Q3rN9SR+eK4+M8xG7V6fjzKh3TwH2tw0m5Djg=="
+  crossorigin="anonymous"
+  referrerpolicy="no-referrer"
+/>
+
   <link href="https://db.onlinewebfonts.com/c/5a735ad00cad6dab35cc9f3910e9fc65?family=MTN+Brighter+Sans+Light" rel="stylesheet">
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
@@ -19,6 +32,7 @@
       }
     }
   </script>
+  
   <style>
 
     /* For WebKit browsers (Chrome, Safari, Edge) */
@@ -39,7 +53,22 @@
 }
 
 
-    @font-face {
+@font-face {
+    font-family: "MTN Brighter Sans Light";
+    src: url("https://db.onlinewebfonts.com/t/5a735ad00cad6dab35cc9f3910e9fc65.eot");
+    src: url("https://db.onlinewebfonts.com/t/5a735ad00cad6dab35cc9f3910e9fc65.eot?#iefix") format("embedded-opentype"),
+         url("https://db.onlinewebfonts.com/t/5a735ad00cad6dab35cc9f3910e9fc65.woff2") format("woff2"),
+         url("https://db.onlinewebfonts.com/t/5a735ad00cad6dab35cc9f3910e9fc65.woff") format("woff"),
+         url("https://db.onlinewebfonts.com/t/5a735ad00cad6dab35cc9f3910e9fc65.ttf") format("truetype"),
+         url("https://db.onlinewebfonts.com/t/5a735ad00cad6dab35cc9f3910e9fc65.svg#MTN Brighter Sans Light") format("svg");
+}
+
+body, html, * {
+    font-family: "MTN Brighter Sans Light", sans-serif !important;
+}
+
+
+    {% comment %} @font-face {
         font-family: "MTN Brighter Sans Light";
         src: url("https://db.onlinewebfonts.com/t/5a735ad00cad6dab35cc9f3910e9fc65.eot");
         src: url("https://db.onlinewebfonts.com/t/5a735ad00cad6dab35cc9f3910e9fc65.eot?#iefix") format("embedded-opentype"),
@@ -52,7 +81,7 @@
     /* Apply the font globally */
     body {
         font-family: "MTN Brighter Sans Light", sans-serif;
-    }
+    } {% endcomment %}
 </style>
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" integrity="sha512-..." crossorigin="anonymous" referrerpolicy="no-referrer" />
 
@@ -63,6 +92,45 @@
 <img height="60" width="60" src="data:image/jpeg;base64,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" 
 alt=" Sanyu hospital Logo">
 <h1><span class="text-teal-600 text-3xl font-bold">sanyu</span><br><span class="text-sm text-teal-600">hospital</span></h1>
+<div class="dropdown z-10">
+  <div tabindex="0" role="button" class="m-1 text-primary font-semibold">
+    <svg
+  xmlns="http://www.w3.org/2000/svg"
+  width="32"
+  height="32"
+  fill="currentColor"
+  viewBox="0 0 16 16"
+  class="mx-6"
+>
+  <path
+    fill-rule="evenodd"
+    d="M1.5 5.5l6 6 6-6H1.5z"
+  />
+</svg>
+
+</div>
+  <div tabindex="0" class="dropdown-content card card-sm bg-base-100 z-1 w-72 shadow-md p-4 mt-4">
+  <p class="text-sm text-gray-600 mb-3">
+    <strong>Sanyu Hospital</strong> is dedicated to providing compassionate healthcare services including outpatient care, maternity, emergency response, and health education.
+  </p>
+  <div class="grid grid-cols-2 gap-2 text-sm">
+    <a href="{% url 'index' %}" class="btn btn-outline btn-sm">Home</a>
+    <a href="{% url 'about' %}" class="btn btn-outline btn-sm">About</a>
+    <a href="{% url 'services' %}" class="btn btn-outline btn-sm">Services</a>
+    {% comment %} <a href="{% url 'departments' %}" class="btn btn-outline btn-sm">Departments</a> {% endcomment %}
+    <a href="{% url 'teams' %}" class="btn btn-outline btn-sm">Doctors</a>
+    <a href="{% url 'appointment' %}" class="btn btn-outline btn-sm">Appointments</a>
+    {% comment %} <a href="{% url 'events' %}" class="btn btn-outline btn-sm">Events</a> {% endcomment %}
+    <a href="{% url 'donate' %}" class="btn btn-outline btn-sm">Missions</a>
+    <a href="{% url 'teams' %}" class="btn btn-outline btn-sm">Team</a>
+    <a href="{% url 'news' %}" class="btn btn-outline btn-sm">News</a>
+    <a href="{% url 'contact' %}" class="btn btn-outline btn-sm">Contact</a>
+  </div>
+</div>
+
+</div>
+
+
   </div>
 
 
@@ -70,16 +138,25 @@ alt=" Sanyu hospital Logo">
   <li class="cursor-pointer">
     <a href="{% url 'index' %}">Home</a>
   </li>
-  <li class="cursor-pointer">
+  {% comment %} <li class="cursor-pointer">
     <a href="{% url 'events' %}">Events</a>
     
-  </li>
+  </li> {% endcomment %}
   <li class="cursor-pointer">
      <a href="{% url 'appointment' %}">Appointments</a>
     
   </li>
   <li class="cursor-pointer">
-     <a href="{% url 'donate' %}">Donate</a>
+     <a href="{% url 'donate' %}">Missions</a>
+    </li>
+    <li class="cursor-pointer">
+     <a href="{% url 'teams' %}">Team</a>
+    </li>
+      <li class="cursor-pointer">
+     <a href="{% url 'services' %}">Services</a>
+    </li>
+        <li class="cursor-pointer">
+     <a href="{% url 'news' %}">News</a>
     </li>
   <li class="cursor-pointer">
      <a href="{% url 'about' %}">About</a>

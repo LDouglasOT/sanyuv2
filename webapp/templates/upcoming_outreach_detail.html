@@ -1,0 +1,201 @@
+{% extends "base.html" %}
+{% block content %}
+
+{% load form_tags %}
+{% load widget_tweaks %}
+{% load static %}
+
+
+<section class="max-w-5xl mx-auto py-12 px-4">
+  <div class="grid md:grid-cols-2 gap-10 items-center">
+    <img src="{{ outreach.image_url }}" alt="{{ outreach.title }}" class="rounded-xl shadow-lg w-full h-auto">
+    <div>
+      <h1 class="text-3xl font-bold text-green-700 mb-4">{{ outreach.title }}</h1>
+      <p class="text-gray-700 mb-2"><strong>Team Lead:</strong> {{ outreach.team_lead }}</p>
+      <p class="text-gray-700 mb-2"><strong>Location:</strong> {{ outreach.location }}</p>
+      <p class="text-gray-700 mb-2"><strong>Date:</strong> {{ outreach.event_date }}</p>
+      <p class="text-gray-700 mb-4">{{ outreach.description }}</p>
+      
+      <div class="bg-green-50 border border-green-200 p-4 rounded-xl">
+        <p class="mb-1 font-semibold">Amount Raised: UGX {{ outreach.amount_raised }}</p>
+        <p class="mb-1">Goal: UGX {{ outreach.goal_amount }}</p>
+        <p class="mb-1">Donors: {{ outreach.donor_count }}</p>
+        <div class="bg-gray-200 rounded-full h-3 mt-2">
+          <div class="bg-green-500 h-3 rounded-full" style="width: {{ outreach.amount_raised|divisibleby:outreach.goal_amount|floatformat:2 }}%;"></div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+
+<section class="bg-base-100 py-16 px-6 md:px-20">
+  <div class="max-w-3xl mx-auto text-center">
+    <h2 class="text-3xl md:text-4xl font-bold text-primary mb-6">Support Our Upcoming Medical Outreach</h2>
+    <p class="text-base-content mb-10">
+      All funds received will be used to support the medical outreach. Your contribution brings health and hope to many. Thank you!
+    </p>
+
+    <div class="space-y-6 text-left">
+      <!-- Bank Account -->
+      <div class="bg-base-200 rounded-box p-4 flex justify-between items-center">
+        <div>
+          <p class="font-semibold text-base-content">Bank Account (UGX)</p>
+          <p id="bank-info" class="text-sm opacity-80">
+            Sanyu Hospital Outreach - {{banks.account_number}} - {{banks.name}}
+          </p>
+          <p>swift code:  {{banks.name}} ibna:  {{banks.name}}</p>
+        </div>
+        <button class="btn btn-sm btn-outline btn-primary" onclick="copyText('bank-info')">
+          Copy
+        </button>
+      </div>
+
+      <!-- Wise Email -->
+      <div class="bg-base-200 rounded-box p-4 flex justify-between items-center">
+        <div>
+          <p class="font-semibold text-base-content">Wise Email</p>
+          <p id="wise-email" class="text-sm opacity-80">{{banks.wise_email}}</p>
+        </div>
+        <button class="btn btn-sm btn-outline btn-primary" onclick="copyText('wise-email')">
+          Copy
+        </button>
+      </div>
+
+      <!-- Mobile Money -->
+      <div class="bg-base-200 rounded-box p-4 flex justify-between items-center">
+        <div>
+          <p class="font-semibold text-base-content">Mobile Money (UGX)</p>
+          <p id="momo" class="text-sm opacity-80">
+            MTN: {{banks.mtn}} | Airtel: {{banks.airtel}}
+          </p>
+        </div>
+        <button class="btn btn-sm btn-outline btn-primary" onclick="copyText('momo')">
+          Copy
+        </button>
+      </div>
+    </div>
+
+    <!-- Donate via Wise -->
+    <div class="mt-10">
+      <a href="https://wise.com/send-money/" target="_blank" class="btn btn-lg btn-success">
+        Donate via Wise
+      </a>
+    </div>
+  </div>
+</section>
+
+<!-- Copy Script -->
+<script>
+  function copyText(elementId) {
+    const text = document.getElementById(elementId).innerText;
+    navigator.clipboard.writeText(text).then(() => {
+      alert('Copied to clipboard!');
+    });
+  }
+</script>
+
+
+
+  <hr class="my-10">
+
+ <h2 class="bg-gray-200 text-2xl font-semibold text-green-800 mb-6">
+  After making your donation, kindly fill out this form so we can recognize your contribution and include you among our honored donors.
+</h2>
+
+<form method="POST" class="bg-white p-8 rounded-xl shadow-lg max-w-3xl mx-auto grid gap-6 md:grid-cols-2">
+  {% csrf_token %}
+  
+  <!-- Full Name -->
+  <div class="flex flex-col">
+    <label for="id_name" class="mb-2 font-semibold text-gray-700">Full Name <span class="text-red-500">*</span></label>
+    {{ form.name|add_class:"border border-gray-300 rounded-md p-3 focus:outline-none focus:ring-2 focus:ring-green-500 transition" }}
+    {% if form.name.errors %}
+      <p class="text-red-600 text-sm mt-1">{{ form.name.errors }}</p>
+    {% endif %}
+  </div>
+
+  <!-- Email -->
+  <div class="flex flex-col">
+    <label for="id_email" class="mb-2 font-semibold text-gray-700">Email Address</label>
+    {{ form.email|add_class:"border border-gray-300 rounded-md p-3 focus:outline-none focus:ring-2 focus:ring-green-500 transition" }}
+    {% if form.email.errors %}
+      <p class="text-red-600 text-sm mt-1">{{ form.email.errors }}</p>
+    {% endif %}
+  </div>
+
+  <!-- Phone -->
+  <div class="flex flex-col">
+    <label for="id_phone" class="mb-2 font-semibold text-gray-700">Phone Number</label>
+    {{ form.phone|add_class:"border border-gray-300 rounded-md p-3 focus:outline-none focus:ring-2 focus:ring-green-500 transition" }}
+    {% if form.phone.errors %}
+      <p class="text-red-600 text-sm mt-1">{{ form.phone.errors }}</p>
+    {% endif %}
+  </div>
+
+  <!-- Country -->
+  <div class="flex flex-col">
+    <label for="id_country" class="mb-2 font-semibold text-gray-700">Country</label>
+    {{ form.country|add_class:"border border-gray-300 rounded-md p-3 focus:outline-none focus:ring-2 focus:ring-green-500 transition" }}
+    {% if form.country.errors %}
+      <p class="text-red-600 text-sm mt-1">{{ form.country.errors }}</p>
+    {% endif %}
+  </div>
+
+  <!-- Amount -->
+  <div class="flex flex-col md:col-span-2">
+    <label for="id_amount" class="mb-2 font-semibold text-gray-700">Amount to Donate (UGX) <span class="text-red-500">*</span></label>
+    {{ form.amount|add_class:"border border-gray-300 rounded-md p-3 focus:outline-none focus:ring-2 focus:ring-green-500 transition" }}
+    {% if form.amount.errors %}
+      <p class="text-red-600 text-sm mt-1">{{ form.amount.errors }}</p>
+    {% endif %}
+  </div>
+
+  <!-- Message / Testimonial -->
+  <div class="flex flex-col md:col-span-2">
+    <label for="id_message" class="mb-2 font-semibold text-gray-700">Reason / Testimonial</label>
+    {{ form.message|add_class:"border border-gray-300 rounded-md p-3 focus:outline-none focus:ring-2 focus:ring-green-500 transition resize-y" }}
+    {% if form.message.errors %}
+      <p class="text-red-600 text-sm mt-1">{{ form.message.errors }}</p>
+    {% endif %}
+  </div>
+
+  <!-- Anonymity Checkbox -->
+  <div class="flex items-center md:col-span-2 space-x-2">
+    {{ form.anonimity }}
+    <label for="id_anonimity" class="text-gray-700 font-medium select-none cursor-pointer">I want to remain anonymous</label>
+  </div>
+
+  <!-- Submit Button -->
+  <div class="md:col-span-2">
+    <button type="submit" 
+      class="w-full bg-green-600 hover:bg-green-700 text-white font-bold py-3 rounded-lg shadow-md transition duration-300">
+      Proceed to Donate
+    </button>
+  </div>
+</form>
+
+
+  <hr class="my-10">
+
+  <h2 class="text-2xl font-bold text-green-800 mb-6">Meet Our Donors ❤️</h2>
+  {% if donors %}
+  <div class="grid md:grid-cols-3 gap-6">
+    {% for donor in donors %}
+      <div class="bg-white border rounded-lg p-4 shadow text-center">
+        {% if donor.image_url %}
+          <img src="{{ donor.image_url }}" class="w-20 h-20 rounded-full mx-auto mb-2" alt="{{ donor.name }}">
+        {% endif %}
+        <h4 class="text-lg font-semibold text-gray-800">{{ donor.name }}</h4>
+        <p class="text-green-700 font-bold">UGX {{ donor.amount }}</p>
+        {% if donor.message %}
+          <p class="text-sm italic mt-2 text-gray-600">“{{ donor.message }}”</p>
+        {% endif %}
+      </div>
+    {% endfor %}
+  </div>
+  {% else %}
+    <p class="text-gray-600">No public donors yet. Be the first to support this outreach ❤️</p>
+  {% endif %}
+</section>
+
+{% endblock %}

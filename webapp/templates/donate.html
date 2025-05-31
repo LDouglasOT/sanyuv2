@@ -45,40 +45,118 @@
   </div>
 </section>
 
-<!-- Impact Section -->
-<section id="impact" class="py-20 px-6 text-center">
-  <h2 class="text-3xl font-bold text-blue-900 mb-12">Past Medical Outreaches</h2>
-  <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 max-w-6xl mx-auto">
-    
-    <!-- Outreach Item -->
-    <div class="relative group overflow-hidden rounded-xl shadow-lg">
-      <img src="https://firebasestorage.googleapis.com/v0/b/twinbrook-12f84.appspot.com/o/output%20(1).jpg?alt=media&token=c3eaad9c-1885-4105-8e3c-87ee32463ecc" alt="Outreach 1" class="w-full h-full object-cover">
-      <div class="absolute inset-0 bg-gradient-to-t from-black via-transparent to-black opacity-60"></div>
-      <p class="caption-text">
-        Treated 250+ Patients in Rural Clinic
-      </p>
-    </div>
 
-    <!-- Outreach Item -->
-    <div class="relative group overflow-hidden rounded-xl shadow-lg">
-      <img src="https://firebasestorage.googleapis.com/v0/b/twinbrook-12f84.appspot.com/o/output%20(1).jpg?alt=media&token=c3eaad9c-1885-4105-8e3c-87ee32463ecc" alt="Outreach 2" class="w-full h-full object-cover">
-      <div class="absolute inset-0 bg-gradient-to-t from-black via-transparent to-black opacity-60"></div>
-      <p class="caption-text">
-        Free Health Checkups for Over 300 Locals
-      </p>
-    </div>
 
-    <!-- Outreach Item -->
-    <div class="relative group overflow-hidden rounded-xl shadow-lg">
-      <img src="https://firebasestorage.googleapis.com/v0/b/twinbrook-12f84.appspot.com/o/output%20(1).jpg?alt=media&token=c3eaad9c-1885-4105-8e3c-87ee32463ecc" alt="Outreach 3" class="w-full h-full object-cover">
-      <div class="absolute inset-0 bg-gradient-to-t from-black via-transparent to-black opacity-60"></div>
-      <p class="caption-text">
-        Volunteers Mobilized to Serve Remote Villages
-      </p>
-    </div>
 
+<!-- UPCOMING OUTREACHES -->
+<section class="py-20 px-6 bg-white" id="upcoming"> 
+  <h2 class="text-4xl font-bold text-green-800 mb-14 text-center">🌿 Upcoming Medical Outreaches</h2>
+
+  <div class="space-y-12 max-w-6xl mx-auto">
+    {% for outreach in upcoming_outreaches %}
+    <div class="grid md:grid-cols-3 bg-green-50 rounded-2xl shadow-xl border border-green-200 overflow-hidden hover:shadow-2xl transition-shadow duration-300">
+      
+      <!-- Image with Gradient Overlay -->
+      <div class="relative h-64 md:h-auto">
+        <img src="{{ outreach.image_url }}" alt="Outreach Image" class="w-full h-full object-cover">
+        <div class="absolute inset-0 bg-gradient-to-t from-green-900/70 via-green-700/40 to-transparent"></div>
+      </div>
+
+      <!-- Content -->
+      <div class="md:col-span-2 p-8 flex flex-col justify-between">
+        <div class="mb-6">
+          <h3 class="text-3xl font-extrabold text-green-900 mb-2">{{ outreach.title }}</h3>
+          <p class="text-sm text-green-700 mb-4 flex items-center gap-1">
+            👤 Team Lead: <span class="font-semibold text-green-900 ml-1">{{ outreach.team_lead }}</span>
+          </p>
+          <p class="text-md text-green-800 mb-6 leading-relaxed">{{ outreach.description }}</p>
+ <p class="flex items-center gap-2 text-green-700">📍 <strong>Location: {{ outreach.location }}</strong> </p>
+ <br>
+          <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4 text-sm text-green-700">
+            <p class="flex items-center gap-2">📅 <strong>Date: {{ outreach.event_date }}</strong></p>
+           
+            <p class="flex items-center gap-2">🧑‍⚕️ <strong>Patients Goal: {{ outreach.patients_treated }}</strong></p>
+            <p class="flex items-center gap-2">💰 <strong>Raised: <span class="font-semibold text-green-900">{{ outreach.amount_raised }}</span></strong></p>
+            <p class="flex items-center gap-2">🎯 <strong>Goal: {{ outreach.goal_amount }}</strong></p>
+            <p class="flex items-center gap-2">🙌 <strong>Donors: {{ outreach.donor_count }}</strong></p>
+            <p class="flex items-center gap-2">
+              🔁 <strong>Status:</strong>
+              {% if outreach.donation_status == 'stopped' %}
+              <span class="font-semibold text-red-600">Stopped</span>
+              {% else %}
+              <span class="font-semibold text-green-600">Ongoing</span>
+              {% endif %}
+            </p>
+          </div>
+        </div>
+
+        <a href="{% url 'upcoming_outreach_detail' outreach.id %}" 
+           class="mt-4 w-fit bg-gradient-to-r from-green-600 to-green-400 text-white font-semibold px-6 py-3 rounded-xl shadow-md hover:from-green-700 hover:to-green-500 transition flex items-center gap-2">
+          🌟 Support This Outreach
+        </a>
+      </div>
+    </div>
+    {% empty %}
+    <p class="text-center text-green-600 italic">No upcoming outreaches at the moment.</p>
+    {% endfor %}
   </div>
 </section>
+
+
+
+<!-- PAST OUTREACHES -->
+<section id="impact" class="py-20 px-6 bg-gray-50">
+  <h2 class="text-4xl font-bold text-blue-900 mb-14 text-center">🩺 Past Medical Outreaches</h2>
+
+  <div class="space-y-10 max-w-6xl mx-auto">
+    {% for outreach in past_outreaches %}
+    <div class="grid md:grid-cols-3 bg-white rounded-2xl shadow-xl border border-gray-200 overflow-hidden hover:shadow-2xl transition-shadow duration-300">
+      
+      <!-- Outreach Image -->
+      <div class="h-64 md:h-auto">
+        <img src="{{ outreach.image_url }}" alt="Outreach Image" class="w-full h-full object-cover">
+      </div>
+
+      <!-- Content Section -->
+      <div class="md:col-span-2 p-8 flex flex-col justify-between">
+        <div>
+          <h3 class="text-3xl font-bold text-gray-800 mb-2">{{ outreach.title }}</h3>
+          <p class="text-sm text-gray-600 mb-4 flex items-center gap-1">👤 Team Lead: 
+            <span class="font-semibold text-gray-800">{{ outreach.team_lead }}</span>
+          </p>
+          
+          <p class="text-md text-gray-700 mb-6">{{ outreach.description }}</p>
+
+          <!-- Donation Summary -->
+          <div class="bg-green-50 border-l-4 border-green-500 p-4 rounded mb-6">
+            <p class="text-green-800 font-semibold text-lg">💰 {{ outreach.amount_raised }} Raised</p>
+            <p class="text-sm text-gray-700 mt-1">
+              From <strong>{{ outreach.donor_count }} donors</strong> towards a goal of <strong>{{ outreach.goal }}</strong>.
+            </p>
+            <p class="text-xs text-green-600 italic mt-1">🌟 Top Donor: {{ outreach.top_donor }}</p>
+          </div>
+
+          <!-- Stats Section -->
+          <div class="grid sm:grid-cols-2 lg:grid-cols-3 gap-4 text-sm text-green-700 mb-6">
+            <p class="flex items-center gap-2 text-green-700">🧑‍⚕️ <strong>Patients Treated:</strong> {{ outreach.patients }}</p>
+            <p class="flex items-center gap-2">💸 <strong>Total Cost:</strong> {{ outreach.total_cost }}</p>
+            {% comment %} <p class="flex items-start gap-2">🗣️ <strong>Testimonial:</strong> <span class="italic">{{ outreach.testimonial }}</span></p> {% endcomment %}
+          </div>
+        </div>
+
+        <a href="{% url 'outreach_detail' outreach.id %}" 
+           class="mt-4 inline-flex items-center bg-green-700 text-white text-sm font-medium px-5 py-3 rounded-xl hover:bg-blue-700 transition w-fit shadow-md">
+          🔍 See Details
+        </a>
+      </div>
+    </div>
+    {% empty %}
+    <p class="text-center text-gray-600 italic">No past outreaches recorded yet.</p>
+    {% endfor %}
+  </div>
+</section>
+
+
 
 <!-- Testimonial Section -->
 <section class="bg-gray-100 py-20 px-6">

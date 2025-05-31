@@ -1,0 +1,43 @@
+{% extends "base.html" %}
+{% block title %}Thank You!{% endblock %}
+
+{% block content %}
+<div class="bg-gradient-to-tr from-green-50 to-blue-100 min-h-screen flex items-center justify-center py-12 px-4 sm:px-6 lg:px-8">
+
+  <div class="max-w-2xl flex items-center justify-center w-full flex-col bg-white p-10 rounded-3xl shadow-lg text-center animate-fade-in-up">
+    <div class="mb-6">
+      <svg class="mx-auto w-20 h-20 text-green-500 animate-bounce" fill="none" stroke="currentColor" stroke-width="1.5" viewBox="0 0 24 24">
+        <path stroke-linecap="round" stroke-linejoin="round" d="M9 12l2 2 4-4m-8 9a9 9 0 1118 0 9 9 0 01-18 0z" />
+      </svg>
+    </div>
+
+    <h1 class="text-4xl font-bold text-green-700 mb-4">Thank You!</h1>
+    <p class="text-lg text-gray-700 mb-4">
+      Your generous donation means the world to us and will directly support our next medical outreach mission.
+    </p>
+
+    <p class="text-md text-gray-600 mb-6">
+      Every contribution helps us bring healing, hope, and care to the communities that need it most. 💚
+    </p>
+
+    <a href="/" class="btn btn-success btn-wide shadow-lg hover:scale-105 transition">Return Home</a>
+  </div>
+</div>
+
+<!-- Custom Animations -->
+<style>
+  @keyframes fade-in-up {
+    0% {
+      opacity: 0;
+      transform: translateY(20px);
+    }
+    100% {
+      opacity: 1;
+      transform: translateY(0);
+    }
+  }
+  .animate-fade-in-up {
+    animation: fade-in-up 1s ease-out forwards;
+  }
+</style>
+{% endblock %}
