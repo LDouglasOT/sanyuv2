@@ -13,6 +13,3 @@ s3transfer==0.8.2
 Pillow==10.1.0
 requests==2.31.0
 
-# Optional but useful
-python-slugify==8.0.1
-sqlparse==0.4.4
