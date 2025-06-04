@@ -187,23 +187,31 @@
 
 
 <!-- Floating Button -->
-<button id="issue-button" class="fixed bottom-6 right-6 bg-teal-900 text-white px-4 py-2 text-sm rounded-full shadow-md hover:bg-red-600 z-50">
+<button id="issue-button"
+  class="fixed bottom-6 right-4 md:right-6 bg-teal-900 text-white px-4 py-2 text-sm rounded-full shadow-md hover:bg-red-600 z-50">
   Facing issues donating?
 </button>
 
 <!-- Popup Form -->
-<div id="issue-popup" class="hidden fixed bottom-20 right-6 bg-teal-500 shadow-lg rounded-lg w-80 p-4 z-50">
+<div id="issue-popup"
+  class="hidden fixed bottom-20 right-4 md:right-6 bg-teal-500 shadow-lg rounded-lg w-[90%] max-w-sm p-4 z-50">
   <form action="https://formspree.io/f/mjkrkwbj" method="POST">
     <h3 class="text-lg font-semibold mb-2">Let us know</h3>
-    <input type="text" name="full_name" placeholder="Full Name" required class="w-full px-3 py-2 mb-2 border rounded">
-    <input type="email" name="email" placeholder="Email Address" required class="w-full px-3 py-2 mb-2 border rounded">
-    <textarea name="issue" placeholder="Describe your issue..." rows="3" required class="w-full px-3 py-2 mb-2 border rounded"></textarea>
+    <input type="text" name="full_name" placeholder="Full Name" required
+      class="w-full px-3 py-2 mb-2 border rounded">
+    <input type="email" name="email" placeholder="Email Address" required
+      class="w-full px-3 py-2 mb-2 border rounded">
+    <textarea name="issue" placeholder="Describe your issue..." rows="3" required
+      class="w-full px-3 py-2 mb-2 border rounded"></textarea>
     <div class="flex justify-end gap-2">
-      <button type="button" id="close-popup" class="text-sm text-gray-600 hover:text-black">Cancel</button>
-      <button type="submit" class="bg-teal-900 text-white px-3 py-1 rounded text-sm hover:bg-teal-900">Submit</button>
+      <button type="button" id="close-popup"
+        class="text-sm text-gray-600 hover:text-black">Cancel</button>
+      <button type="submit"
+        class="bg-teal-900 text-white px-3 py-1 rounded text-sm hover:bg-teal-800">Submit</button>
     </div>
   </form>
 </div>
+
 
 
 <script>
