@@ -11,8 +11,8 @@ def get_pesapal_token():
 
     url = "https://cybqa.pesapal.com/pesapalv3/api/Auth/RequestToken" 
     payload = {
-        "consumer_key": os.environ.PESAPAL_CONSUMER_KEY,
-        "consumer_secret":os.environ.PESAPAL_CONSUMER_SECRET,
+        "consumer_key": os.environ.get("PESAPAL_CONSUMER_KEY"),
+        "consumer_secret":os.environ.get("PESAPAL_CONSUMER_SECRET"),
     }
     print(payload)
     print(url)
