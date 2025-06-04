@@ -9,13 +9,13 @@
     Join us for our next medical outreach event — bringing healthcare to underserved communities.
   </p>
   <div class="bg-green-700 rounded-lg p-8 max-w-xl w-full shadow-lg">
-    <h2 class="text-3xl font-semibold mb-2">Community Health Fair 2025</h2>
-    <p class="text-lg mb-2">Date: <strong>June 15, 2025</strong></p>
-    <p class="text-lg mb-4">Location: <strong>Sanyu Hospital Grounds</strong></p>
+    <h2 class="text-3xl font-semibold mb-2">{{events.title}}</h2>
+    <p class="text-lg mb-2">Date: <strong>{{event.date}}</strong></p>
+    <p class="text-lg mb-4">Location: <strong>{{event.location}}</strong></p>
     <p class="mb-6">
-      Health consultations, discounted treatment on next visit, nutrition advice, and more.
+     {{event.description}}
     </p>
-    <a href="https://calendar.app.google/vhoztF5BYCGM5ft77" class="bg-yellow-400 text-black font-semibold px-6 py-3 rounded-lg hover:bg-yellow-300 transition">
+    <a href="{{event.google_link}}"  class="bg-yellow-400 text-black font-semibold px-6 py-3 rounded-lg hover:bg-yellow-300 transition">
       Add to Google Calendar
     </a>
   </div>
@@ -27,34 +27,22 @@
   <h2 class="text-4xl font-bold text-center text-green-900 mb-12">Videos of Past Events</h2>
   <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
     
-    <!-- Video 1 -->
+    {% for event in inactive_events %}
     <div class="rounded-lg overflow-hidden shadow-lg">
-      <iframe class="w-full h-56 md:h-64" src="https://www.youtube.com/embed/dQw4w9WgXcQ" title="Outreach Event 2024" frameborder="0" allowfullscreen></iframe>
+      <iframe class="w-full h-56 md:h-64" src="{{event.video_url}}" title="Outreach Event 2024" frameborder="0" allowfullscreen></iframe>
       <div class="p-4 bg-white">
-        <h3 class="font-semibold text-lg text-green-900 mb-1">Outreach Event 2024</h3>
-        <p class="text-gray-600">Highlights from our 2024 rural clinic outreach.</p>
+        <h3 class="font-semibold text-lg text-green-900 mb-1">{{event.title}}</h3>
+        <p class="text-gray-600">Highlights from our {{event.title}} event.</p>
       </div>
     </div>
-
-    <!-- Video 2 -->
-    <div class="rounded-lg overflow-hidden shadow-lg">
-      <iframe class="w-full h-56 md:h-64" src="https://www.youtube.com/embed/3JZ_D3ELwOQ" title="Health Education Workshop" frameborder="0" allowfullscreen></iframe>
-      <div class="p-4 bg-white">
-        <h3 class="font-semibold text-lg text-green-900 mb-1">Health Education Workshop</h3>
-        <p class="text-gray-600">Community nutrition and wellness session.</p>
-      </div>
+    {% empty %}
+    <div class="col-span-full text-center text-gray-500">
+      No past event videos available at the moment. Please check back later.
     </div>
-
-    <!-- Video 3 -->
-    <div class="rounded-lg overflow-hidden shadow-lg">
-      <iframe class="w-full h-56 md:h-64" src="https://www.youtube.com/embed/V-_O7nl0Ii0" title="Mobile Clinic Outreach" frameborder="0" allowfullscreen></iframe>
-      <div class="p-4 bg-white">
-        <h3 class="font-semibold text-lg text-green-900 mb-1">Mobile Clinic Outreach</h3>
-        <p class="text-gray-600">Serving remote villages with medical services.</p>
-      </div>
-    </div>
+    {% endfor %}
 
   </div>
 </section>
+
 
 {% endblock %}

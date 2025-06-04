@@ -250,6 +250,7 @@ class Event(models.Model):
     video_url = models.URLField(blank=True, null=True)  # For past events video link (YouTube etc.)
     status = models.BooleanField(default=False, help_text="True if event has occurred, False if upcoming")
     image = models.ImageField(upload_to='events/', null=True, blank=True)
+    google_link = models.URLField(blank=True, null=True, help_text="Google Maps link for event location")
     class Meta:
         ordering = ['-date']
 
