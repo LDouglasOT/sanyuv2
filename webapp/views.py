@@ -309,7 +309,7 @@ def get_donation_for_sanyu(request):
 
     banks = BankDs.objects.filter(is_active=True).first()
     departments = Departments.objects.all()
-    return render(request, 'equip.html', {    
+    return render(request, 'Equip.html', {    
         'banks': banks,
         'departments': departments,
     })
