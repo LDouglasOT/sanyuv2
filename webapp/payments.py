@@ -55,7 +55,7 @@ def submit_pesapal_order(request):
                 "currency": userdata.get("currency", "USD"),
                 "amount": userdata.get("amount", 10000.00),
                 "description": userdata.get("reason", 'Payment for services'),
-                "callback_url": "http://localhost:8000/thanks/",
+                "callback_url": "https://sanyuv2.onrender.com/thanks/",
                 "notification_id": "56ebcaf2-4b69-4137-bc70-dbba225501f4",
                 "billing_address": {
                     "email_address": userdata.get("email_address", "john.doe@example.com"),
