@@ -12,7 +12,7 @@ SERVICE_ACCOUNT_PATH = os.path.join(BASE_DIR, settings.SERVICE_KEY_PATH)
 # Load the Firebase credentials from the file
 cred = credentials.Certificate(SERVICE_ACCOUNT_PATH)
 firebase_admin.initialize_app(cred, {
-    'storageBucket': 'your-firebase-project-id.appspot.com'
+    'storageBucket': 'twinbrook-12f84.appspot.com'
 })
 
 bucket = storage.bucket()
