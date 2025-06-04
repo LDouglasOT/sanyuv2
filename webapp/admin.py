@@ -40,3 +40,4 @@ from .models import Slide, Speciality
 admin.site.register(Slide)
 admin.site.register(Speciality)
 admin.site.register(Event)
+admin.site.register(Payments)

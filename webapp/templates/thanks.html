@@ -2,42 +2,78 @@
 {% block title %}Thank You!{% endblock %}
 
 {% block content %}
-<div class="bg-gradient-to-tr from-green-50 to-blue-100 min-h-screen flex items-center justify-center py-12 px-4 sm:px-6 lg:px-8">
+<div class="min-h-screen flex items-center justify-center py-12 px-4 sm:px-6 lg:px-8 bg-gradient-to-br from-green-50 to-white animate-fade-in">
+  <div class="max-w-2xl w-full bg-white p-10 rounded-3xl shadow-2xl text-center relative">
 
-  <div class="max-w-2xl flex items-center justify-center w-full flex-col bg-white p-10 rounded-3xl shadow-lg text-center animate-fade-in-up">
-    <div class="mb-6">
-      <svg class="mx-auto w-20 h-20 text-green-500 animate-bounce" fill="none" stroke="currentColor" stroke-width="1.5" viewBox="0 0 24 24">
-        <path stroke-linecap="round" stroke-linejoin="round" d="M9 12l2 2 4-4m-8 9a9 9 0 1118 0 9 9 0 01-18 0z" />
-      </svg>
-    </div>
+    {% if status %}
+      <h1 class="text-5xl font-extrabold text-green-700 mb-6 animate-bounce">{{ status }}</h1>
+      <p class="text-xl text-gray-800 mb-4 font-medium">
+        Dear <span class="font-semibold">{{ FirstName }} {{ LastName }}</span>,
+      </p>
+      <p class="text-lg text-gray-700 mb-6">
+        Your generous donation of <span class="font-bold">{{ Amount }} {{ currency }}</span> means the world to us. 
+        You've made a real difference!
+      </p>
+      <canvas id="confetti-canvas" class="absolute inset-0 pointer-events-none z-10"></canvas>
 
-    <h1 class="text-4xl font-bold text-green-700 mb-4">Thank You!</h1>
-    <p class="text-lg text-gray-700 mb-4">
-      Your generous donation means the world to us and will directly support our next medical outreach mission.
-    </p>
+    {% elif error %}
+      <h1 class="text-4xl font-bold text-yellow-700 mb-4">Payment Pending Verification</h1>
+      <p class="text-lg text-gray-700 mb-2">
+        Your payment is currently pending verification. Please wait a moment, don't worry, we are on it! Don't close this page.
+      </p>
+      <strong><p class="text-md  text-xl text-gray-600">Reloading in <span id="timer">10</span> seconds...</p></strong>
+    
+    {% else %}
+      <h1 class="text-4xl font-bold text-yellow-700 mb-4">Payment Pending</h1>
+      <p class="text-lg text-gray-700 mb-2">
+        Your payment is currently pending verification. Please wait a moment, don't worry, we are on it! Don't close this page.
+      </p>
+      <strong><p class="text-md  text-xl text-gray-600">Reloading in <span id="timer">10</span> seconds...</p></strong>
+    {% endif %}
 
-    <p class="text-md text-gray-600 mb-6">
-      Every contribution helps us bring healing, hope, and care to the communities that need it most. 💚
-    </p>
-
-    <a href="/" class="btn btn-success btn-wide shadow-lg hover:scale-105 transition">Return Home</a>
+    <a href="/" class="mt-6 inline-block px-6 py-3 bg-green-600 text-white rounded-xl text-lg shadow-md hover:bg-green-700 transition-transform hover:scale-105">Return Home</a>
   </div>
 </div>
 
-<!-- Custom Animations -->
+{% if status %}
+<!-- Confetti Script -->
+<script src="https://cdn.jsdelivr.net/npm/canvas-confetti@1.5.1/dist/confetti.browser.min.js"></script>
+<script>
+  const canvas = document.getElementById('confetti-canvas');
+  const myConfetti = confetti.create(canvas, { resize: true, useWorker: true });
+  myConfetti({
+    particleCount: 150,
+    spread: 100,
+    origin: { y: 0.6 }
+  });
+</script>
+{% endif %}
+
+{% if not status %}
+<script>
+  let seconds = 10;
+  const timerElement = document.getElementById('timer');
+
+  const countdown = setInterval(() => {
+    seconds--;
+    if (timerElement) {
+      timerElement.textContent = seconds;
+    }
+    if (seconds <= 0) {
+      clearInterval(countdown);
+      location.reload();
+    }
+  }, 1000);
+</script>
+{% endif %}
+
 <style>
-  @keyframes fade-in-up {
-    0% {
-      opacity: 0;
-      transform: translateY(20px);
-    }
-    100% {
-      opacity: 1;
-      transform: translateY(0);
-    }
+  @keyframes fadeIn {
+    from { opacity: 0; transform: translateY(10px); }
+    to { opacity: 1; transform: translateY(0); }
   }
-  .animate-fade-in-up {
-    animation: fade-in-up 1s ease-out forwards;
+  .animate-fade-in {
+    animation: fadeIn 1.2s ease-out;
   }
 </style>
 {% endblock %}

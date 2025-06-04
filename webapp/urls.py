@@ -1,6 +1,10 @@
 
 from django.urls import path,include
+
+from .pesapal import pesapal_ipn
 from .views import *
+# from .payments import views
+from .payments import *
 
 
 urlpatterns = [
@@ -20,5 +24,10 @@ urlpatterns = [
     path('outreach/<int:id>/', outreach_detail, name='outreach_detail'),
     path('upcomingoutreach/<int:id>/', upcoming_outreach_detail, name='upcoming_outreach_detail'),
     path('services/', services_view, name='services'),
-
+    # path('payment/start/', views.start_payment, name='start_payment'),
+    # path('payment/callback/', views.payment_callback, name='payment_callback'),
+    path('pesapal/', pesapal_redirect, name='pesapal_redirect'),
+    path('api/submit-order/', submit_pesapal_order, name='submit_order'),
+    path('ipn/', pesapal_ipn, name='pesapal_ipn'),
+    path('status/', get_transaction_status, name='get_transaction_status'),
 ]

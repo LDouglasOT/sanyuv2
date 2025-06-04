@@ -23,7 +23,7 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 SECRET_KEY = 'django-insecure-9)u%q@$$7_nf1_ak6f_7krh1c3z)0z7lpwenajuk2c_-$s_b1p'
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = False
+DEBUG = True
 
 ALLOWED_HOSTS = ["*"]
 
@@ -38,8 +38,13 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
     'webapp',
+    'django.contrib.sites',
+    'django_pesapal',
     'widget_tweaks',
 ]
+X_FRAME_OPTIONS = 'ALLOWALL'
+
+SITE_ID = 1
 
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',
@@ -126,3 +131,8 @@ STATICFILES_STORAGE = 'whitenoise.storage.CompressedManifestStaticFilesStorage'
 # https://docs.djangoproject.com/en/5.2/ref/settings/#default-auto-field
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
+
+# settings.py
+
+PESAPAL_TRANSACTION_DEFAULT_REDIRECT_URL = 'webapp:thank-you'
+SERVICE_KEY_PATH = 'serviceAccountKey.json'

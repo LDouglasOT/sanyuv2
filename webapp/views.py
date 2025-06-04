@@ -2,12 +2,13 @@ import json
 from django.shortcuts import get_object_or_404, render
 from django.shortcuts import render, redirect
 from django.contrib import messages
-
+from .models import Facility, Event, Payments
+from .payments import *
 
 from django.shortcuts import redirect, render
 from django.core.mail import send_mail
 
-from django.http import HttpResponse
+from django.http import HttpResponse, JsonResponse
 
 from .models import BankDs, NewsItem, Slide, Speciality
 # firebase_utils.py
@@ -15,6 +16,19 @@ from .models import BankDs, NewsItem, Slide, Speciality
 # Create your views here.
 import json
 from django.core.serializers.json import DjangoJSONEncoder
+
+def events(request):
+    # Assuming you have a model for events, fetch them here
+    #     
+    events = Event.objects.all()
+    active_events = events.filter(status=True) 
+    inactive_events = events.filter(status=False)
+     # Example filter, adjust as needed
+    # Replace with your actual model and query
+    return render(request, 'events.html', {'events': active_events, 'inactive_events': inactive_events})
+
+
+
 
 def index(request):
     facilities = Facility.objects.all()
@@ -131,34 +145,6 @@ def book_event_invitation(request):
     return redirect('events')
 from django.shortcuts import render
 
-def events(request):
-    if request.method == 'POST':
-        form = EventInvitationForm(request.POST)
-        if form.is_valid():
-            invitation = form.save()
-
-            # Send to Formspree
-            try:
-                response = requests.post(
-                    'https://formspree.io/f/YOUR_FORMSPREE_ID',  # Replace with actual ID
-                    data={
-                        'name': invitation.name,
-                        'email': invitation.email,
-                    },
-                    headers={'Accept': 'application/json'}
-                )
-                if response.status_code != 200:
-                    print("Formspree error:", response.content)
-            except Exception as e:
-                print("Failed to send to Formspree:", e)
-
-            return redirect('thank-you')  # Create this route or replace with your homepage
-    else:
-        form = EventInvitationForm()
-
-    return render(request, 'events.html', {'form': form})
-
-
 
 from django.shortcuts import render, get_object_or_404
 from .models import MedicalOutreach, Donor
@@ -166,7 +152,9 @@ from .form import SupportIntentForm
 
 import requests
 from django.conf import settings
+from django.views.decorators.clickjacking import xframe_options_exempt
 
+@xframe_options_exempt
 def upcoming_outreach_detail(request, id):
     outreach = get_object_or_404(MedicalOutreach, id=id, status=False)
     donors = outreach.donors.filter(anonimity=False)
@@ -215,7 +203,56 @@ def upcoming_outreach_detail(request, id):
 
 
 def thanks(request):
-    return render(request, 'thanks.html')
+    order_tracking_id = request.GET.get('OrderTrackingId')
+    merchant_reference = request.GET.get('OrderMerchantReference')
+    response = get_transaction_status_method(order_tracking_id)  # Call the method to get transaction status
+    print(response.get("status"))
+    payment = Payments.objects.filter(transaction_id=order_tracking_id).first()  # Fetch the payment using the tracking ID
+    print(payment)
+    if not payment:
+        return render(request, 'thanks.html', {"error": "Payment not found"})          
+    # Ensure you have the order_tracking_id and merchant_reference
+    if order_tracking_id and merchant_reference:
+        
+        try:
+            if response.get("status") == "200":
+                
+                payment.transaction_id = order_tracking_id  # Update tracking ID if needed
+                payment.save()
+                return render(request, 'thanks.html', {"status": "Payment verification successful", "FirstName": payment.firstname, "LastName": payment.lastname, "Email": payment.email, "Phone": payment.phone, "Country": payment.country, "Amount": payment.amount,"currency": payment.currency})
+            else:
+                return render(request, 'thanks.html',{"FirstName": payment.firstname, "LastName": payment.lastname, "Email": payment.email, "Phone": payment.phone, "Country": payment.country, "Amount": payment.amount,"error": 'Payment verification failed', "currency": payment.currency,"message": "Dear {}, your payment of {} {} was not successful. We are constantly checking for its status, don't close this page so we can verify it".format(payment.firstname, payment.amount, payment.currency)})
+        except Exception as e:
+            print(f"Error processing payment: {str(e)}")
+
+            return render(request, 'thanks.html', {"error": "Payment not found"})
+    else:
+        return render(request, 'thanks.html')
+
+   
+def get_transaction_status_method(order_tracking_id):
+    token = get_pesapal_token()  # Ensure this function is defined to get your token
+    if not order_tracking_id:
+        return None
+
+    # Replace with your actual bearer token
+    bearer_token = token
+    url = f' https://cybqa.pesapal.com/pesapalv3/api/Transactions/GetTransactionStatus?orderTrackingId={order_tracking_id}'
+
+    headers = {
+        'Authorization': f'Bearer {bearer_token}',
+        'Accept': 'application/json',
+        'Content-Type': 'application/json',
+    }
+
+    try:
+        response = requests.get(url, headers=headers)
+        response.raise_for_status()
+        response = response.json()
+        print(response)
+        return response
+    except requests.RequestException as e:
+        return None
 
 
 
@@ -240,3 +277,31 @@ def news_detail(request, id):
 def services_view(request):
     services = Service.objects.filter(is_active=True)
     return render(request, 'services.html', {'services': services})
+
+
+
+def pesapal_redirect(request):
+    return render(request, 'payment_redirect.html')
+
+
+@csrf_exempt  # Use with caution; ensure proper security measures are in place
+def get_transaction_status(request):
+    order_tracking_id = request.GET.get('orderTrackingId')
+    if not order_tracking_id:
+        return JsonResponse({'error': 'Missing orderTrackingId'}, status=400)
+
+    # Replace with your actual bearer token
+    response = get_transaction_status_method(order_tracking_id)
+    payment=Payments.objects.filter(transaction_id=order_tracking_id)
+    if not payment.exists():
+        return JsonResponse({'error': 'Payment not found'}, status=404)         
+    try:
+        
+        if response.get("status") == "200":
+            payment.update(status=True)
+            payment.save()
+            return render(request, 'thanks.html', {"status": "Payment verification successful", "FirstName": payment.get("firstname"), "LastName": payment.get("lastname"), "Email": payment.get("email"), "Phone": payment.get("phone"), "Country": payment.get("country"), "Amount": payment.get("amount"),"currency": payment.get("currency")})
+        else:
+            return render(request, 'thanks.html',{"FirstName": payment.firstname, "LastName": payment.lastname, "Email": payment.email, "Phone": payment.phone, "Country": payment.country, "Amount": payment.amount,"status": 500, "currency": payment.currency})
+    except:
+        return render(request, 'thanks.html', {"error": "Payment not found"})

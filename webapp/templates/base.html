@@ -120,7 +120,7 @@ alt=" Sanyu hospital Logo">
     {% comment %} <a href="{% url 'departments' %}" class="btn btn-outline btn-sm">Departments</a> {% endcomment %}
     <a href="{% url 'teams' %}" class="btn btn-outline btn-sm">Doctors</a>
     <a href="{% url 'appointment' %}" class="btn btn-outline btn-sm">Appointments</a>
-    {% comment %} <a href="{% url 'events' %}" class="btn btn-outline btn-sm">Events</a> {% endcomment %}
+    <a href="{% url 'events' %}" class="btn btn-outline btn-sm">Events</a>
     <a href="{% url 'donate' %}" class="btn btn-outline btn-sm">Missions</a>
     <a href="{% url 'teams' %}" class="btn btn-outline btn-sm">Team</a>
     <a href="{% url 'news' %}" class="btn btn-outline btn-sm">News</a>
@@ -138,10 +138,9 @@ alt=" Sanyu hospital Logo">
   <li class="cursor-pointer">
     <a href="{% url 'index' %}">Home</a>
   </li>
-  {% comment %} <li class="cursor-pointer">
+  <li class="cursor-pointer">
     <a href="{% url 'events' %}">Events</a>
-    
-  </li> {% endcomment %}
+  </li> 
   <li class="cursor-pointer">
      <a href="{% url 'appointment' %}">Appointments</a>
     
@@ -169,8 +168,10 @@ alt=" Sanyu hospital Logo">
 </div>
 
 
-
+<div class="payment-iframe">
 {% block content %}{% endblock %}
+</div>
+
 
 
 

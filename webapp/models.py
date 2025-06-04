@@ -248,7 +248,8 @@ class Event(models.Model):
     date = models.DateField()
     location = models.CharField(max_length=255)
     video_url = models.URLField(blank=True, null=True)  # For past events video link (YouTube etc.)
-
+    status = models.BooleanField(default=False, help_text="True if event has occurred, False if upcoming")
+    image = models.ImageField(upload_to='events/', null=True, blank=True)
     class Meta:
         ordering = ['-date']
 
@@ -264,3 +265,31 @@ class Event(models.Model):
     def is_past(self):
         from django.utils.timezone import now
         return self.date < now().date()
+    
+
+
+class Payments(models.Model):
+    user = models.CharField(max_length=255)
+    amount = models.DecimalField(max_digits=12, decimal_places=2)
+    payment_method = models.CharField(max_length=50, choices=[('CREDIT CARDS', 'CREDIT CARDS'), ('bank_transfer', 'Bank Transfer'), ('MTN MOBILE MONEY', 'MTN MOBILE MONEY'), ('AIRTEL MOBILE MONEY', 'AIRTEL MOBILE MONEY')], default='ALL')
+    status = models.CharField(max_length=20, choices=[('pending', 'Pending'), ('completed', 'Completed'), ('failed', 'Failed')], default='pending')
+    transaction_id = models.CharField(max_length=100, unique=True)
+    created_at = models.DateTimeField(auto_now_add=True)
+    firstname = models.CharField(max_length=100, blank=True, null=True)
+    lastname = models.CharField(max_length=100, blank=True, null=True)
+    email = models.EmailField(blank=True, null=True)
+    status = models.BooleanField(default=False, help_text="True if payment is successful, False if pending or failed")
+    phone = models.CharField(max_length=20, blank=True, null=True)
+    country = models.CharField(max_length=100, blank=True, null=True)
+    callback_url = models.URLField(blank=True, null=True, help_text="URL to redirect after payment")
+    notification_id = models.CharField(max_length=100, blank=True, null=True, help_text="Notification ID for IPN setup")
+    merchant_reference = models.CharField(max_length=100, unique=True, blank=True, null=True, help_text="Unique reference for the merchant")
+    reason = models.TextField(blank=True, null=True, help_text="Reason for the payment, e.g. 'Donation', 'Service Payment'")
+    currency = models.CharField(max_length=10, default='USD', help_text="Currency for the payment, e.g. 'USD', 'EUR'")
+    def save(self, *args, **kwargs):
+        if not self.transaction_id:
+            self.transaction_id = f"PAY-{uuid.uuid4()}"
+        super().save(*args, **kwargs)
+
+    def __str__(self):
+        return f"{self.user} - {self.amount} - {self.status}"
