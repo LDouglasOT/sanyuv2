@@ -313,3 +313,9 @@ def get_donation_for_sanyu(request):
         'banks': banks,
         'departments': departments,
     })
+
+
+
+def ourdonors(request):
+    donors = Payments.objects.all().order_by('-amount')
+    return render(request, 'donors.html', {'donors': donors})

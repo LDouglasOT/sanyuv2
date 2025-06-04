@@ -31,4 +31,5 @@ urlpatterns = [
     path('ipn/', pesapal_ipn, name='pesapal_ipn'),
     path('status/', get_transaction_status, name='get_transaction_status'),
     path('sanyu/donate/',get_donation_for_sanyu, name='get_donation_for_sanyu'),
+    path('our-donors/', ourdonors, name='get_donors'),
 ]
