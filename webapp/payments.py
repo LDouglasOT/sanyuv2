@@ -56,7 +56,7 @@ def submit_pesapal_order(request):
                 "amount": userdata.get("amount", 10000.00),
                 "description": userdata.get("reason", 'Payment for services'),
                 "callback_url": "http://localhost:8000/thanks/",
-                "notification_id": "755980a8-78f8-4b00-afde-dbbb7bd81fe0",
+                "notification_id": "56ebcaf2-4b69-4137-bc70-dbba225501f4",
                 "billing_address": {
                     "email_address": userdata.get("email_address", "john.doe@example.com"),
                     "phone_number": userdata.get("phone_number", "0723000000"),
