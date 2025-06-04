@@ -273,8 +273,9 @@ def news_detail(request, id):
 
 
 def services_view(request):
-    services = Service.objects.filter(is_active=True)
-    return render(request, 'services.html', {'services': services})
+
+    specialities = Speciality.objects.all()
+    return render(request, 'services.html', {'services': specialities})
 
 
 
