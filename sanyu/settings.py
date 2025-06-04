@@ -10,6 +10,7 @@ For the full list of settings and their values, see
 https://docs.djangoproject.com/en/5.2/ref/settings/
 """
 
+import os
 from pathlib import Path
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
@@ -135,4 +136,17 @@ DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 # settings.py
 
 PESAPAL_TRANSACTION_DEFAULT_REDIRECT_URL = 'webapp:thank-you'
+
+import os
+
+# Default fallback path
 SERVICE_KEY_PATH = 'serviceAccountKey.json'
+
+# Try to override from Render's secret file if available
+secret_file_path = '/etc/secrets/secret_key.txt'
+if os.path.exists(secret_file_path):
+    with open(secret_file_path) as f:
+        SERVICE_KEY_PATH = f.read().strip()
+
+
+
