@@ -2,7 +2,7 @@ import json
 from django.shortcuts import get_object_or_404, render
 from django.shortcuts import render, redirect
 from django.contrib import messages
-from .models import Departments, Facility, Event, Payments
+from .models import Departments, Facility, Event, Partner, Payments
 from .payments import *
 
 from django.shortcuts import redirect, render
@@ -320,3 +320,9 @@ def get_donation_for_sanyu(request):
 def ourdonors(request):
     donors = Payments.objects.all().order_by('-amount')
     return render(request, 'donors.html', {'donors': donors})
+
+
+
+def partners_page(request):
+    partners = Partner.objects.all()
+    return render(request, 'partners_page.html', {'partners': partners})

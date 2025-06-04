@@ -152,7 +152,7 @@
 <div class="max-w-2xl mx-auto p-6 bg-white rounded-xl shadow-md mt-10">
   <h2 class="text-2xl font-bold mb-4 text-center text-green-700">Donate Equipment</h2>
 
-  <form id="equipment-donation" action="https://formspree.io/f/xqabzgrb" method="POST">
+  <form id="equipment-donation" action="https://formspree.io/f/mjkrkwbj" method="POST">
     <!-- Donor Info -->
     <div class="grid grid-cols-1 md:grid-cols-2 gap-4 mb-4">
       <input type="text" name="first_name" placeholder="First Name" required class="border px-4 py-2 rounded w-full focus:ring-2 ring-green-300">
@@ -186,6 +186,24 @@
 </div>
 
 
+<!-- Floating Button -->
+<button id="issue-button" class="fixed bottom-6 right-6 bg-teal-900 text-white px-4 py-2 text-sm rounded-full shadow-md hover:bg-red-600 z-50">
+  Facing issues donating?
+</button>
+
+<!-- Popup Form -->
+<div id="issue-popup" class="hidden fixed bottom-20 right-6 bg-teal-500 shadow-lg rounded-lg w-80 p-4 z-50">
+  <form action="https://formspree.io/f/mjkrkwbj" method="POST">
+    <h3 class="text-lg font-semibold mb-2">Let us know</h3>
+    <input type="text" name="full_name" placeholder="Full Name" required class="w-full px-3 py-2 mb-2 border rounded">
+    <input type="email" name="email" placeholder="Email Address" required class="w-full px-3 py-2 mb-2 border rounded">
+    <textarea name="issue" placeholder="Describe your issue..." rows="3" required class="w-full px-3 py-2 mb-2 border rounded"></textarea>
+    <div class="flex justify-end gap-2">
+      <button type="button" id="close-popup" class="text-sm text-gray-600 hover:text-black">Cancel</button>
+      <button type="submit" class="bg-teal-900 text-white px-3 py-1 rounded text-sm hover:bg-teal-900">Submit</button>
+    </div>
+  </form>
+</div>
 
 
 <script>
@@ -297,6 +315,93 @@ document.getElementById('payment-form').addEventListener('submit', async functio
     submitBtn.disabled = false;
   }
 });
+
+</script>
+
+
+<script>
+  const issueBtn = document.getElementById('issue-button');
+  const issuePopup = document.getElementById('issue-popup');
+  const closePopup = document.getElementById('close-popup');
+
+  issueBtn.addEventListener('click', () => {
+    issuePopup.classList.toggle('hidden');
+  });
+
+  closePopup.addEventListener('click', () => {
+    issuePopup.classList.add('hidden');
+  });
+
+  // Optional: Close popup when clicking outside
+  document.addEventListener('click', function (e) {
+    if (!issuePopup.contains(e.target) && !issueBtn.contains(e.target)) {
+      issuePopup.classList.add('hidden');
+    }
+  });
+
+document.addEventListener('DOMContentLoaded', () => {
+  const popup = document.getElementById('issue-popup');
+  const form = popup.querySelector('form');
+  const closeBtn = document.getElementById('close-popup');
+
+  // Create loader element
+  const loader = document.createElement('div');
+  loader.className = 'loader hidden mt-2 text-white text-center';
+  loader.textContent = 'Sending...';
+  form.appendChild(loader);
+
+  // Create success message element
+  const successMessage = document.createElement('div');
+  successMessage.className = 'success-message hidden mt-2 text-white text-center';
+  successMessage.textContent = 'Thank you! We will contact you shortly.';
+  form.appendChild(successMessage);
+
+  // Close popup on cancel button click
+  closeBtn.addEventListener('click', () => {
+    popup.classList.add('hidden');
+    resetForm();
+  });
+
+  // Handle form submission
+  form.addEventListener('submit', (e) => {
+    e.preventDefault();
+
+    loader.classList.remove('hidden');
+    successMessage.classList.add('hidden');
+
+    const formData = new FormData(form);
+
+    fetch(form.action, {
+      method: 'POST',
+      body: formData,
+      headers: {
+        'Accept': 'application/json'
+      }
+    }).then(response => {
+      loader.classList.add('hidden');
+      if (response.ok) {
+        successMessage.classList.remove('hidden');
+        form.reset();
+        setTimeout(() => {
+          popup.classList.add('hidden');
+          successMessage.classList.add('hidden');
+        }, 3000);
+      } else {
+        alert('Oops! There was a problem submitting your form.');
+      }
+    }).catch(() => {
+      loader.classList.add('hidden');
+      alert('Oops! There was a problem submitting your form.');
+    });
+  });
+
+  function resetForm() {
+    form.reset();
+    loader.classList.add('hidden');
+    successMessage.classList.add('hidden');
+  }
+});
+
 
 </script>
 

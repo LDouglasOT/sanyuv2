@@ -309,3 +309,25 @@ class Departments(models.Model):
         if self.image and not self.image_url:
             self.image_url = upload_image_to_firebase(self.image)
         super().save(*args, **kwargs)
+
+
+from django.db import models
+
+class Partner(models.Model):
+    PARTNER_TYPES = [
+        ('NGO', 'Non-Governmental Organization'),
+        ('CORP', 'Corporate'),
+        ('BUS', 'Business'),
+        ('GOV', 'Government'),
+        ('ACA', 'Academic Institution'),
+        ('INT', 'International Organization'),
+        ('FND', 'Foundation'),
+        ('IND', 'Individual'),
+    ]
+    name = models.CharField(max_length=255)
+    logo = models.ImageField(upload_to='partners/logos/')
+    website = models.URLField(max_length=200)
+    partner_type = models.CharField(max_length=4, choices=PARTNER_TYPES)
+
+    def __str__(self):
+        return self.name

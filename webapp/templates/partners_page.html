@@ -1,0 +1,76 @@
+{% extends 'base.html' %}
+{% block content %}
+<section class="partners-section py-16 px-10 bg-gray-100">
+  <div class="container mx-auto text-center">
+    <h2 class="text-3xl font-semibold mb-8">Our Esteemed Partners</h2>
+    <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-8">
+      {% for partner in partners %}
+        <div class="partner-card bg-white p-6 rounded-lg shadow-lg">
+          <img src="{{ partner.logo.url }}" alt="{{ partner.name }} Logo" class="w-full h-32 object-contain mb-4">
+          <h3 class="text-xl font-semibold">{{ partner.name }}</h3>
+          <p class="text-sm text-gray-500">{{ partner.get_partner_type_display }}</p>
+          <a href="{{ partner.website }}" target="_blank" class="text-teal-500 hover:underline">Visit Website</a>
+        </div>
+      {% endfor %}
+    </div>
+    <button id="request-partner-btn" class="mt-8 px-6 py-2 bg-teal-600 text-white rounded-lg hover:bg-teal-700">Become a Partner</button>
+  </div>
+</section>
+
+<!-- Partner Request Modal -->
+<div id="partner-request-modal" class="hidden fixed inset-0 bg-gray-800 bg-opacity-75 flex items-center justify-center z-50">
+  <div class="bg-white p-8 rounded-lg shadow-lg w-96">
+    <h3 class="text-2xl font-semibold mb-4">Partner Request Form</h3>
+    <form id="partner-request-form" action="https://formspree.io/f/your_form_id" method="POST">
+      <input type="text" name="full_name" placeholder="Full Name" required class="w-full p-2 mb-4 border border-gray-300 rounded">
+      <input type="email" name="email" placeholder="Email Address" required class="w-full p-2 mb-4 border border-gray-300 rounded">
+      <textarea name="message" placeholder="Why do you want to partner with us?" rows="4" required class="w-full p-2 mb-4 border border-gray-300 rounded"></textarea>
+      <div class="flex justify-end gap-4">
+        <button type="button" id="close-modal-btn" class="px-4 py-2 bg-gray-300 text-gray-700 rounded">Cancel</button>
+        <button type="submit" class="px-4 py-2 bg-teal-600 text-white rounded">Submit</button>
+      </div>
+    </form>
+    <div id="form-loader" class="hidden mt-4 text-center">
+      <svg class="animate-spin h-5 w-5 text-teal-600 mx-auto" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24">
+        <circle class="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" stroke-width="4"></circle>
+        <path class="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8v8H4z"></path>
+      </svg>
+      <p class="mt-2 text-teal-600">Sending...</p>
+    </div>
+    <div id="form-message" class="hidden mt-4 text-center text-green-600">
+      <p>Thank you for your interest! We will contact you shortly.</p>
+    </div>
+  </div>
+</div>
+
+<script>
+  document.getElementById('request-partner-btn').addEventListener('click', () => {
+    document.getElementById('partner-request-modal').classList.remove('hidden');
+  });
+
+  document.getElementById('close-modal-btn').addEventListener('click', () => {
+    document.getElementById('partner-request-modal').classList.add('hidden');
+  });
+
+  document.getElementById('partner-request-form').addEventListener('submit', async (e) => {
+    e.preventDefault();
+    document.getElementById('form-loader').classList.remove('hidden');
+    const formData = new FormData(e.target);
+    try {
+      const response = await fetch(e.target.action, {
+        method: 'POST',
+        body: formData,
+      });
+      if (response.ok) {
+        document.getElementById('form-loader').classList.add('hidden');
+        document.getElementById('form-message').classList.remove('hidden');
+        e.target.reset();
+      } else {
+        throw new Error('Failed to send message');
+      }
+    } catch (error) {
+      alert('An error occurred. Please try again later.');
+    }
+  });
+</script>
+{% endblock %}

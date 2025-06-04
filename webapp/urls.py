@@ -32,4 +32,5 @@ urlpatterns = [
     path('status/', get_transaction_status, name='get_transaction_status'),
     path('sanyu/donate/',get_donation_for_sanyu, name='get_donation_for_sanyu'),
     path('our-donors/', ourdonors, name='get_donors'),
+    path('partners/', partners_page, name='partners_page'),
 ]
