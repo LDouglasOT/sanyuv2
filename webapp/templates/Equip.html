@@ -1,0 +1,281 @@
+{% extends "base.html" %}
+{% block content %}
+
+{% load form_tags %}
+{% load widget_tweaks %}
+{% load static %}
+
+
+<section class="max-w-5xl mx-auto py-12 px-4">
+
+
+
+<section class="bg-base-100 py-16 px-6 md:px-20">
+  <div class="max-w-3xl mx-auto text-center">
+    <h2 class="text-3xl md:text-4xl font-bold text-primary mb-6">Support Sanyu Hospital</h2>
+    <p class="text-base-content mb-10">
+      All funds received will be used to support the medical outreaches, equipment procurement, free treatment for the poor, etc. Your contribution brings health and hope to many. Thank you!
+    </p>
+ <h2 class="text-2xl font-semibold mb-6 text-center">Direct Bank Transfers</h2>
+   
+    <div class="space-y-6 text-left">
+      <!-- Bank Account -->
+      <div class="bg-base-200 rounded-box p-4 flex justify-between items-center">
+        <div>
+          <p class="font-semibold text-base-content">Bank Account (UGX)</p>
+          <p id="bank-info" class="text-sm opacity-80">
+            Sanyu Hospital Outreach - {{banks.account_number}} - {{banks.name}}
+          </p>
+          <p>swift code:  {{banks.name}} ibna:  {{banks.name}}</p>
+        </div>
+        <button class="btn btn-sm btn-outline btn-primary" onclick="copyText('bank-info')">
+          Copy
+        </button>
+      </div>
+    </div>
+
+  </div>
+</section>
+
+<!-- Copy Script -->
+<script>
+  function copyText(elementId) {
+    const text = document.getElementById(elementId).innerText;
+    navigator.clipboard.writeText(text).then(() => {
+      alert('Copied to clipboard!');
+    });
+  }
+</script>
+
+
+
+  <hr class="">
+  <div class="max-w-5xl mx-auto py-12 px-14">
+<div class="bg-white rounded shadow-md w-full p-2 bg-green-50">
+    <h2 class="text-2xl font-semibold mb-6 text-center">Pesapal Payment(Visa, mastercards, mobile money, eezypay)</h2>
+ <form id="payment-form" class="grid grid-cols-1 md:grid-cols-2 gap-4 max-w-3xl mx-auto p-6 bg-white rounded-xl shadow-md">
+
+  <!-- Left Column -->
+  <input type="email" id="email_address" placeholder="Email Address" required class="w-full px-4 py-2 border rounded focus:outline-none focus:ring-2 ring-blue-300"/>
+  <input type="text" id="phone_number" placeholder="Phone Number" required class="w-full px-4 py-2 border rounded focus:outline-none focus:ring-2 ring-blue-300"/>
+
+  <input type="text" id="first_name" placeholder="First Name" required class="w-full px-4 py-2 border rounded focus:outline-none focus:ring-2 ring-blue-300"/>
+  <input type="text" id="last_name" placeholder="Last Name" required class="w-full px-4 py-2 border rounded focus:outline-none focus:ring-2 ring-blue-300"/>
+
+  <input type="text" id="line_1" placeholder="Address Line 1" required class="w-full px-4 py-2 border rounded focus:outline-none focus:ring-2 ring-blue-300"/>
+  <input type="text" id="city" placeholder="City" required class="w-full px-4 py-2 border rounded focus:outline-none focus:ring-2 ring-blue-300"/>
+
+  <input type="number" id="amount" placeholder="Amount" min="1" step="0.01" required class="w-full px-4 py-2 border rounded focus:outline-none focus:ring-2 ring-blue-300"/>
+  <select id="currency" required class="w-full px-4 py-2 border rounded focus:outline-none focus:ring-2 ring-blue-300">
+    <option value="">Select Currency</option>
+    <option value="KES">KES - Kenyan Shilling</option>
+    <option value="UGX">UGX - Ugandan Shilling</option>
+    <option value="TZS">TZS - Tanzanian Shilling</option>
+    <option value="RWF">RWF - Rwandan Franc</option>
+    <option value="USD">USD - US Dollar</option>
+  </select>
+
+  <select id="department" required class="w-full px-4 py-2 border rounded focus:outline-none focus:ring-2 ring-blue-300">
+    <option disabled selected>Pick a Deparment to donate to</option>
+    {%for dep in departments%}
+    <option>{{dep.name}}</option>
+    {% endfor %}
+  </select>
+
+
+  <!-- Full-width Submit Button -->
+  <div class="md:col-span-2">
+    <button type="submit" id="submit-btn" class="w-full bg-blue-500 text-white py-2 rounded hover:bg-blue-600 transition duration-200">
+      Pay Now
+    </button>
+  </div>
+
+  <!-- Loader -->
+  <div id="loader" class="md:col-span-2 flex justify-center mt-2 hidden">
+    <svg class="animate-spin h-5 w-5 text-blue-500" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24">
+      <circle class="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" stroke-width="4"></circle>
+      <path class="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8v8H4z"></path>
+    </svg>
+  </div>
+
+  <!-- Message -->
+  <div id="message" class="md:col-span-2 text-center text-red-500 mt-2"></div>
+</form>
+
+
+  </div>
+  </div>
+
+
+
+  <hr class="my-10">
+<!-- Payment Iframe -->
+<!-- Loader Modal -->
+<div id="loader-modal" class="fixed inset-0 bg-gray-800 bg-opacity-75 flex items-center justify-center hidden z-50">
+  <div class="bg-white p-6 rounded-lg shadow-lg text-center">
+    <p class="text-lg font-semibold mb-4">Redirecting to secure payment gateway...</p>
+    <svg class="animate-spin h-8 w-8 text-blue-500 mx-auto" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24">
+      <circle class="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" stroke-width="4"></circle>
+      <path class="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8v8H4z"></path>
+    </svg>
+  </div>
+</div>
+
+
+</section>
+
+    <h2 class="text-2xl font-semibold mb-6 text-center">EQUIPMENT DONATION FORM</h2>
+  
+<div class="max-w-2xl mx-auto p-6 bg-white rounded-xl shadow-md mt-10">
+  <h2 class="text-2xl font-bold mb-4 text-center text-green-700">Donate Equipment</h2>
+
+  <form action="https://formspree.io/f/xqabzgrb" method="POST">
+    <!-- Donor Info -->
+    <div class="grid grid-cols-1 md:grid-cols-2 gap-4 mb-4">
+      <input type="text" name="first_name" placeholder="First Name" required class="border px-4 py-2 rounded w-full focus:ring-2 ring-green-300">
+      <input type="text" name="last_name" placeholder="Last Name" required class="border px-4 py-2 rounded w-full focus:ring-2 ring-green-300">
+      <input type="email" name="email" placeholder="Email Address" required class="border px-4 py-2 rounded w-full focus:ring-2 ring-green-300">
+      <input type="tel" name="phone" placeholder="Phone Number" class="border px-4 py-2 rounded w-full focus:ring-2 ring-green-300">
+    </div>
+
+    <!-- Equipment Info -->
+    <div class="mb-4">
+      <input type="text" name="equipment_name" placeholder="Equipment Name" required class="border px-4 py-2 rounded w-full focus:ring-2 ring-green-300">
+    </div>
+    <div class="mb-4">
+      <textarea name="equipment_description" rows="4" placeholder="Description of Equipment" required class="border px-4 py-2 rounded w-full focus:ring-2 ring-green-300"></textarea>
+    </div>
+    <div class="mb-4">
+      <input type="text" name="condition" placeholder="Condition (e.g. New, Used)" required class="border px-4 py-2 rounded w-full focus:ring-2 ring-green-300">
+    </div>
+
+    <!-- Address -->
+    <div class="grid grid-cols-1 md:grid-cols-2 gap-4 mb-4">
+      <input type="text" name="address_line" placeholder="Address Line" class="border px-4 py-2 rounded w-full focus:ring-2 ring-green-300">
+      <input type="text" name="city" placeholder="City" class="border px-4 py-2 rounded w-full focus:ring-2 ring-green-300">
+    </div>
+
+    <!-- Submit -->
+    <div class="text-center">
+      <button type="submit" class="bg-green-600 text-white px-6 py-2 rounded hover:bg-green-700 transition">Submit Donation</button>
+    </div>
+  </form>
+</div>
+
+
+
+
+<script>
+  // Function to get the CSRF token from cookies
+function getCookie(name) {
+  let cookieValue = null;
+  if (document.cookie && document.cookie !== '') {
+    const cookies = document.cookie.split(';');
+    for (let i = 0; i < cookies.length; i++) {
+      const cookie = cookies[i].trim();
+      // Does this cookie string begin with the name we want?
+      if (cookie.substring(0, name.length + 1) === (name + '=')) {
+        cookieValue = decodeURIComponent(cookie.substring(name.length + 1));
+        break;
+      }
+    }
+  }
+  return cookieValue;
+}
+
+const element = document.querySelector('.payment-iframe');
+console.log(element);
+document.getElementById('payment-form').addEventListener('submit', async function(e) {
+  e.preventDefault(); // Prevent the default form submission
+
+  const submitBtn = document.getElementById('submit-btn');
+  const loader = document.getElementById('loader');
+  const messageDiv = document.getElementById('message');
+
+  submitBtn.disabled = true;
+  loader.classList.remove('hidden');
+  messageDiv.textContent = '';
+
+  // Collect form data
+  const formData = {
+    email_address: document.getElementById('email_address').value,
+    phone_number: document.getElementById('phone_number').value,
+    first_name: document.getElementById('first_name').value,
+    last_name: document.getElementById('last_name').value,
+    line_1: document.getElementById('line_1').value,
+    city: document.getElementById('city').value,
+    amount: parseFloat(document.getElementById('amount').value),
+    currency: document.getElementById('currency').value,
+    reason: document.getElementById('department').value
+  };
+  console.log(formData);
+  // Validate amount and currency
+  if (!formData.amount || formData.amount <= 0) {
+    messageDiv.textContent = 'Please enter a valid amount.';
+    submitBtn.disabled = false;
+    loader.classList.add('hidden');
+    return;
+  }
+
+  if (!formData.currency) {
+    messageDiv.textContent = 'Please select a currency.';
+    submitBtn.disabled = false;
+    loader.classList.add('hidden');
+    return;
+  }
+
+  // Prepare payload
+  const payload = {
+    currency: formData.currency,
+    amount: formData.amount,
+    description: "Payment for services",
+    callback_url: "https://yourdomain.com/thanks/",
+    notification_id: "your-notification-id",
+    email_address: formData.email_address,
+    phone_number: formData.phone_number,
+    country_code: formData.currency === 'USD' ? 'US' : formData.currency.slice(0, 2),
+    first_name: formData.first_name,
+    last_name: formData.last_name,
+    line_1: formData.line_1,
+    city: formData.city,
+    reason: formData.reason,
+    
+  };
+
+  try {
+    const response = await fetch("{% url 'submit_order' %}", {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+        'X-CSRFToken': getCookie('csrftoken') // Ensure CSRF token is included
+      },
+      body: JSON.stringify(payload),
+      credentials: 'same-origin'
+    });
+
+    const data = await response.json();
+
+    if (response.ok && data.redirect_url) {
+      // Redirect to payment page
+        element.innerHTML = `
+        <div class="flex flex-col justify-center items-center h-screen w-10/12 bg-gray-50">
+          <p class="text-lg text-gray-700 mb-4">Loading secure payment gateway...</p>
+          <iframe src="${data.redirect_url}" class="w-full h-full" frameborder="0"></iframe>
+        </div>`;
+    } else if (data.error) {
+      messageDiv.textContent = data.error;
+    } else {
+      throw new Error(data.message || 'Payment initiation failed.');
+    }
+  } catch (error) {
+    messageDiv.textContent = error.message;
+  } finally {
+    loader.classList.add('hidden');
+    submitBtn.disabled = false;
+  }
+});
+
+</script>
+
+
+{% endblock %}

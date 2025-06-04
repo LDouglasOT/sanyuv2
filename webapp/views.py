@@ -2,7 +2,7 @@ import json
 from django.shortcuts import get_object_or_404, render
 from django.shortcuts import render, redirect
 from django.contrib import messages
-from .models import Facility, Event, Payments
+from .models import Departments, Facility, Event, Payments
 from .payments import *
 
 from django.shortcuts import redirect, render
@@ -26,8 +26,6 @@ def events(request):
      # Example filter, adjust as needed
     # Replace with your actual model and query
     return render(request, 'events.html', {'events': active_events, 'inactive_events': inactive_events})
-
-
 
 
 def index(request):
@@ -305,3 +303,13 @@ def get_transaction_status(request):
             return render(request, 'thanks.html',{"FirstName": payment.firstname, "LastName": payment.lastname, "Email": payment.email, "Phone": payment.phone, "Country": payment.country, "Amount": payment.amount,"status": 500, "currency": payment.currency})
     except:
         return render(request, 'thanks.html', {"error": "Payment not found"})
+    
+
+def get_donation_for_sanyu(request):
+
+    banks = BankDs.objects.filter(is_active=True).first()
+    departments = Departments.objects.all()
+    return render(request, 'equip.html', {    
+        'banks': banks,
+        'departments': departments,
+    })

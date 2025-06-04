@@ -293,3 +293,18 @@ class Payments(models.Model):
 
     def __str__(self):
         return f"{self.user} - {self.amount} - {self.status}"
+
+
+class Departments(models.Model):
+    name = models.CharField(max_length=255)
+    description = models.TextField(blank=True, null=True)
+    image = models.ImageField(upload_to='departments/', null=True, blank=True)
+    image_url = models.URLField(blank=True, null=True)
+
+    def __str__(self):
+        return self.name
+
+    def save(self, *args, **kwargs):
+        if self.image and not self.image_url:
+            self.image_url = upload_image_to_firebase(self.image)
+        super().save(*args, **kwargs)
