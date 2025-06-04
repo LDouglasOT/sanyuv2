@@ -237,7 +237,7 @@ def get_transaction_status_method(order_tracking_id):
 
     # Replace with your actual bearer token
     bearer_token = token
-    url = f' https://cybqa.pesapal.com/pesapalv3/api/Transactions/GetTransactionStatus?orderTrackingId={order_tracking_id}'
+    url = f' https://pay.pesapal.com/v3/api/Transactions/GetTransactionStatus?orderTrackingId={order_tracking_id}'
 
     headers = {
         'Authorization': f'Bearer {bearer_token}',

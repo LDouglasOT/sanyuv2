@@ -9,7 +9,7 @@ from .models import Payments
 
 def get_pesapal_token():
 
-    url = "https://cybqa.pesapal.com/pesapalv3/api/Auth/RequestToken" 
+    url = "https://pay.pesapal.com/v3/api/Auth/RequestToken" 
     payload = {
         "consumer_key": os.environ.get("PESAPAL_CONSUMER_KEY"),
         "consumer_secret":os.environ.get("PESAPAL_CONSUMER_SECRET"),
@@ -48,7 +48,7 @@ def submit_pesapal_order(request):
             userdata = json.loads(request.body)
             merchant_reference = str(uuid.uuid4())
 
-            api_url = "https://cybqa.pesapal.com/pesapalv3/api/Transactions/SubmitOrderRequest"
+            api_url = "https://pay.pesapal.com/v3/api/Transactions/SubmitOrderRequest"
 
             payload = {
                 "id": merchant_reference,
@@ -91,12 +91,6 @@ def submit_pesapal_order(request):
                         "status_code": response.status_code
                     }, status=response.status_code)
                 
-                print(f"Response Data: {data}")
-                {'order_tracking_id': '4c661ee4-be0c-4783-9697-dbbbb3deb2ff',
-                  'merchant_reference': 'b6852549-c73c-4a2b-848e-6bef8c6c87b3', 
-                  'redirect_url': 'https://cybqa.pesapal.com/pesapaliframe/PesapalIframe3/Index?OrderTrackingId=4c661ee4-be0c-4783-9697-dbbbb3deb2ff',
-                  'error': None, 
-                  'status': '200'}
                 Payments.objects.create(
                     user=userdata.get("first_name", "Doe"),
                     amount=userdata.get("amount", 100.00),
