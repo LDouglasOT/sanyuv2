@@ -351,7 +351,7 @@ def partners_page(request):
 def knowledge_base(request):
     knowledge_base   = knowledgebase.objects.all()
     print(knowledge_base)
-    return render(request, 'knowledge.html', {'knowledge_base': knowledge_base})
+    return render(request, 'Knowledge.html', {'knowledge_base': knowledge_base})
 
 from  .models import knowledgebase, Comment
 
@@ -363,7 +363,7 @@ class CommentForm(forms.ModelForm):
 def knowledgebase_detail(request, id):
     base = get_object_or_404(knowledgebase, pk=id)
     base.increment_views()
-    return render(request, 'knowledge-details.html', {'knowledgebase': base})
+    return render(request, 'Knowledge-details.html', {'knowledgebase': base})
 
 
 def service_detail(request, id):
