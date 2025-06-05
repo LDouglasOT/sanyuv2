@@ -130,11 +130,12 @@ body, html, * {
     </div>
 
     <!-- Dropdown for About -->
-    <div class="dropdown relative md:hidden">
-      <button tabindex="0" class="text-primary font-semibold ml-2">
-        <svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" fill="currentColor" viewBox="0 0 16 16">
-          <path fill-rule="evenodd" d="M1.5 5.5l6 6 6-6H1.5z" />
-        </svg>
+    <div class="dropdown relative">
+      <button tabindex="0" class="text-primary font-semibold mx-5">
+           <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+              d="M4 6h16M4 12h16M4 18h16"/>
+      </svg>
       </button>
       <div tabindex="0" class="dropdown-content absolute left-0 mt-2 bg-white shadow-md p-4 w-72 z-50 rounded-md">
         <p class="text-sm text-gray-600 mb-3">
@@ -159,18 +160,9 @@ body, html, * {
     </div>
   </div>
 
-  <!-- Mobile Menu Toggle -->
-  <div class="block md:hidden">
-    <button id="menuToggle" class="text-teal-700 focus:outline-none">
-      <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
-              d="M4 6h16M4 12h16M4 18h16"/>
-      </svg>
-    </button>
-  </div>
 
   <!-- Nav links for medium and up -->
-<ul id="navMenu" class="hidden md:flex flex-wrap items-center gap-5 text-slate-800 mt-4 md:mt-0 md:ml-6">
+<ul id="navMenu" class="md:flex flex-wrap items-center gap-5 text-slate-800 mt-4 md:mt-0 md:ml-6">
   <li><a href="{% url 'index' %}" class="hover:text-green-900 hover:font-bold {% if request.path == '/' %}bg-green-700 text-white{% endif %} active:bg-green-600 px-3 py-2 rounded">Home</a></li>
   <li><a href="{% url 'events' %}" class="hover:text-green-800 hover:font-bold {% if request.path == '/events/' %}bg-green-700 text-white{% endif %} active:bg-green-600 px-3 py-2 rounded">Events</a></li>
   <li><a href="{% url 'appointment' %}" class="hover:text-green-800 hover:font-bold {% if request.path == '/appointment/' %}bg-green-700 text-white{% endif %} active:bg-green-600 px-3 py-2 rounded">Appointments</a></li>
