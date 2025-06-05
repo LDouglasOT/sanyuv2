@@ -132,13 +132,17 @@
 
 <!-- Floating Button -->
 <button id="issue-button"
-  class="fixed bottom-6 right-4 md:right-6 bg-teal-900 text-white px-4 py-2 text-sm rounded-full shadow-md hover:bg-red-600 z-50">
-  Facing issues donating?
+  class="fixed bottom-80 h-80 right-80 md:right-0 bg-teal-900 text-white px-4 py-2 text-sm rounded shadow-md hover:bg-red-600 z-50">
+  <div>
+    <h1 class="underling font-bold text-xl">Donation issues?</h1>
+    <p class="flex wrap">Hello our dear donor,<br> please click here if you <br> are facing issues donating <br> via our page. <br> We will reach out <br> to you so we can help</p>
+  </div>
+  <div class="bg-green-500 rounded py-8 my-2 text-xl">Help</div>
 </button>
 
 <!-- Popup Form -->
 <div id="issue-popup"
-  class="hidden fixed bottom-20 right-4 md:right-6 bg-teal-500 shadow-lg rounded-lg w-[90%] max-w-sm p-4 z-50">
+  class="hidden fixed h-80 bottom-80 right-40 md:right-48 bg-teal-500 shadow-lg rounded-lg w-[90%] max-w-sm p-4 z-50">
   <form action="https://formspree.io/f/mjkrkwbj" method="POST">
     <h3 class="text-lg font-semibold mb-2">Let us know</h3>
     <input type="text" name="full_name" placeholder="Full Name" required
