@@ -162,7 +162,8 @@ body, html, * {
 
 
   <!-- Nav links for medium and up -->
-<ul id="navMenu" class="md:flex flex-wrap items-center gap-5 text-slate-800 mt-4 md:mt-0 md:ml-6">
+<ul id="navMenu" class="hidden md:flex flex-wrap items-center gap-5 text-slate-800 mt-4 md:mt-0 md:ml-6">
+ 
   <li><a href="{% url 'index' %}" class="hover:text-green-900 hover:font-bold {% if request.path == '/' %}bg-green-700 text-white{% endif %} active:bg-green-600 px-3 py-2 rounded">Home</a></li>
   <li><a href="{% url 'events' %}" class="hover:text-green-800 hover:font-bold {% if request.path == '/events/' %}bg-green-700 text-white{% endif %} active:bg-green-600 px-3 py-2 rounded">Events</a></li>
   <li><a href="{% url 'appointment' %}" class="hover:text-green-800 hover:font-bold {% if request.path == '/appointment/' %}bg-green-700 text-white{% endif %} active:bg-green-600 px-3 py-2 rounded">Appointments</a></li>
@@ -201,20 +202,28 @@ body, html, * {
     </a>
   </div>
 </div>
-
+ <button id="mobileMenuButton" class="text-primary font-semibold mx-5 fixed top-5 right-0 md:hidden">
+        <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+              d="M4 6h16M4 12h16M4 18h16"/>
+      </svg>
+  </button>
 <!-- Mobile Dropdown -->
 <div id="mobileNav" class="md:hidden hidden px-4 mt-4">
   <ul class="flex flex-col gap-3 text-slate-800">
-    <li><a href="{% url 'index' %}">Home</a></li>
-    <li><a href="{% url 'events' %}">Events</a></li>
-    <li><a href="{% url 'appointment' %}">Appointments</a></li>
-    <li><a href="{% url 'donate' %}">Missions</a></li>
-    <li><a href="{% url 'teams' %}">Team</a></li>
-    <li><a href="{% url 'services' %}">Services</a></li>
-    <li><a href="{% url 'news' %}">News</a></li>
-    <li><a href="{% url 'about' %}">About</a></li>
-    <li><a href="{% url 'contact' %}">Contact</a></li>
-    <li>
+   <li><a href="{% url 'index' %}" class="hover:text-green-900 hover:font-bold {% if request.path == '/' %}bg-green-700 text-white{% endif %} active:bg-green-600 px-3 py-2 rounded">Home</a></li>
+  <li><a href="{% url 'events' %}" class="hover:text-green-800 hover:font-bold {% if request.path == '/events/' %}bg-green-700 text-white{% endif %} active:bg-green-600 px-3 py-2 rounded">Events</a></li>
+  <li><a href="{% url 'appointment' %}" class="hover:text-green-800 hover:font-bold {% if request.path == '/appointment/' %}bg-green-700 text-white{% endif %} active:bg-green-600 px-3 py-2 rounded">Appointments</a></li>
+  <li><a href="{% url 'donate' %}" class="hover:text-green-800 hover:font-bold {% if request.path == '/donate/' %}bg-green-700 text-white{% endif %} active:bg-green-600 px-3 py-2 rounded">Missions</a></li>
+ <li><a href="{% url 'services' %}" class="hover:text-green-800 hover:font-bold {% if request.path == '/services/' %}bg-green-700 text-white{% endif %} active:bg-green-600 px-3 py-2 rounded">Services</a></li>
+  <li><a href="{% url 'partners_page' %}" class="hover:text-green-800 hover:font-bold {% if request.path == '/partners/' %}bg-green-700 text-white{% endif %} active:bg-green-600 px-3 py-2 rounded">Partners</a></li>
+  <li><a href="{% url 'knowledge_page' %}" class="hover:text-green-800 hover:font-bold {% if request.path == '/knowledge/' %}bg-green-700 text-white{% endif %} active:bg-green-600 px-3 py-2 rounded">Knowledge base</a></li>
+  <li><a href="{% url 'about' %}" class="hover:text-green-800 hover:font-bold {% if request.path == '/about/' %}bg-green-700 text-white{% endif %} active:bg-green-600 px-3 py-2 rounded">About</a></li>
+    <li><a href="{% url 'contact' %}" class="hover:text-green-800 hover:font-bold {% if request.path == '/contact/' %}bg-green-700 text-white{% endif %} active:bg-green-600 px-3 py-2 rounded">Contact</a></li>
+    <li><a href="{% url 'teams' %}" class="hover:text-green-800 hover:font-bold {% if request.path == '/teams/' %}bg-green-700 text-white{% endif %} active:bg-green-600 px-3 py-2 rounded">Team</a></li>
+    <li><a href="{% url 'diaspora_link' %}" class="hover:text-green-800 hover:font-bold {% if request.path == '/diaspora-link/' %}bg-green-700 text-white{% endif %} active:bg-green-600 px-3 py-2 rounded">Diaspora</a></li>
+    
+    <li class="my-1">
       <a href="{% url 'calls' %}" class="block w-full text-center px-4 py-2 bg-teal-700 text-white rounded-lg">
         Request A Call
       </a>
@@ -223,7 +232,7 @@ body, html, * {
 </div>
 
 <script>
-  const toggleBtn = document.getElementById('menuToggle');
+  const toggleBtn = document.getElementById('mobileMenuButton');
   const mobileMenu = document.getElementById('mobileNav');
 
   toggleBtn.addEventListener('click', () => {
@@ -313,5 +322,3 @@ body, html, * {
 
 </body>
 </html>
-<!--               Submit
- -->
