@@ -152,6 +152,8 @@ body, html, * {
           <a href="{% url 'partners_page' %}" class="btn btn-outline btn-sm">Partners</a>
           <a href="{% url 'news' %}" class="btn btn-outline btn-sm">News</a>
           <a href="{% url 'contact' %}" class="btn btn-outline btn-sm">Contact</a>
+          <a href="{% url 'knowledge_page' %}" class="btn btn-outline btn-sm">Knowledge base</a>
+
         </div>
       </div>
     </div>
@@ -168,18 +170,22 @@ body, html, * {
   </div>
 
   <!-- Nav links for medium and up -->
-  <ul id="navMenu" class="hidden md:flex flex-wrap items-center gap-5 text-slate-800 mt-4 md:mt-0 md:ml-6">
-    <li><a href="{% url 'index' %}" class="hover:text-teal-600">Home</a></li>
-    <li><a href="{% url 'events' %}" class="hover:text-teal-600">Events</a></li>
-    <li><a href="{% url 'appointment' %}" class="hover:text-teal-600">Appointments</a></li>
-    <li><a href="{% url 'donate' %}" class="hover:text-teal-600">Missions</a></li>
-    <li><a href="{% url 'teams' %}" class="hover:text-teal-600">Team</a></li>
-    <li><a href="{% url 'services' %}" class="hover:text-teal-600">Services</a></li>
-    <li><a href="{% url 'partners_page' %}" class="hover:text-teal-600">Partners</a></li>
-    <li><a href="{% url 'news' %}" class="hover:text-teal-600">News</a></li>
-    <li><a href="{% url 'about' %}" class="hover:text-teal-600">About</a></li>
-    <li><a href="{% url 'contact' %}" class="hover:text-teal-600">Contact</a></li>
-  </ul>
+<ul id="navMenu" class="hidden md:flex flex-wrap items-center gap-5 text-slate-800 mt-4 md:mt-0 md:ml-6">
+  <li><a href="{% url 'index' %}" class="hover:text-green-900 hover:font-bold {% if request.path == '/' %}bg-green-700 text-white{% endif %} active:bg-green-600 px-3 py-2 rounded">Home</a></li>
+  <li><a href="{% url 'events' %}" class="hover:text-green-800 hover:font-bold {% if request.path == '/events/' %}bg-green-700 text-white{% endif %} active:bg-green-600 px-3 py-2 rounded">Events</a></li>
+  <li><a href="{% url 'appointment' %}" class="hover:text-green-800 hover:font-bold {% if request.path == '/appointment/' %}bg-green-700 text-white{% endif %} active:bg-green-600 px-3 py-2 rounded">Appointments</a></li>
+  <li><a href="{% url 'donate' %}" class="hover:text-green-800 hover:font-bold {% if request.path == '/donate/' %}bg-green-700 text-white{% endif %} active:bg-green-600 px-3 py-2 rounded">Missions</a></li>
+  <li><a href="{% url 'teams' %}" class="hover:text-green-800 hover:font-bold {% if request.path == '/teams/' %}bg-green-700 text-white{% endif %} active:bg-green-600 px-3 py-2 rounded">Team</a></li>
+  <li><a href="{% url 'services' %}" class="hover:text-green-800 hover:font-bold {% if request.path == '/services/' %}bg-green-700 text-white{% endif %} active:bg-green-600 px-3 py-2 rounded">Services</a></li>
+  <li><a href="{% url 'partners_page' %}" class="hover:text-green-800 hover:font-bold {% if request.path == '/partners/' %}bg-green-700 text-white{% endif %} active:bg-green-600 px-3 py-2 rounded">Partners</a></li>
+  <li><a href="{% url 'news' %}" class="hover:text-green-800 hover:font-bold {% if request.path == '/news/' %}bg-green-700 text-white{% endif %} active:bg-green-600 px-3 py-2 rounded">News</a></li>
+  <li><a href="{% url 'about' %}" class="hover:text-green-800 hover:font-bold {% if request.path == '/about/' %}bg-green-700 text-white{% endif %} active:bg-green-600 px-3 py-2 rounded">About</a></li>
+  <li><a href="{% url 'contact' %}" class="hover:text-green-800 hover:font-bold {% if request.path == '/contact/' %}bg-green-700 text-white{% endif %} active:bg-green-600 px-3 py-2 rounded">Contact</a></li>
+  <li><a href="{% url 'knowledge_page' %}" class="hover:text-green-800 hover:font-bold {% if request.path == '/knowledge/' %}bg-green-700 text-white{% endif %} active:bg-green-600 px-3 py-2 rounded">Knowledge base</a></li>
+  <li><a href="{% url 'diaspora_link' %}" class="hover:text-green-800 hover:font-bold {% if request.path == '/diaspora-link/' %}bg-green-700 text-white{% endif %} active:bg-green-600 px-3 py-2 rounded">Diaspora</a></li>
+
+</ul>
+
 
   <!-- Request a Call -->
   <div class="hidden md:block ml-auto">
@@ -249,6 +255,8 @@ body, html, * {
     <div>
       <h3 class="font-bold mb-4">Quick Links</h3>
       <ul class="space-y-3 text-white/90">
+        <li><a href="{% url 'appointment' %}" class="hover:text-white">Book an Appointment</a></li>
+        <li><a href="{% url 'donate' %}" class="hover:text-white">Please donate</a></li>
         <li><a href="#" class="hover:text-white">About Us</a></li>
         <li><a href="#" class="hover:text-white">Departments</a></li>
         <li><a href="#" class="hover:text-white">Appointments</a></li>
@@ -259,9 +267,9 @@ body, html, * {
     <div>
       <h3 class="font-bold mb-4">Information</h3>
       <ul class="space-y-3 text-white/90">
-        <li><a href="#" class="hover:text-white">Privacy Policy</a></li>
-        <li><a href="#" class="hover:text-white">Terms of Service</a></li>
-        <li><a href="#" class="hover:text-white">Support</a></li>
+        {% for partner in partners%}
+        <li><a href="{{partner.website}}" class="hover:text-white">{{partner.name}}</a></li>
+        {% endfor %}
       </ul>
     </div>
 

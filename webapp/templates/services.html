@@ -24,11 +24,14 @@
         <h3 class="text-2xl font-semibold text-green-800 mb-2">{{ service.title }}</h3>
         <p class="text-green-700 text-sm uppercase tracking-wide mb-3">{{ service.label }}</p>
         {% if service.description %}
-        <p class="text-gray-600">{{ service.description }}</p>
+        <p class="text-gray-600">{{ service.description|truncatewords:20 }}</p>
+         <a href="{% url 'service_detail' service.id %}" class="text-teal-700 font-semibold hover:underline">Read more →</a>
         {% endif %}
       </div>
     </div>
+   
     {% endfor %}
   </div>
+
 </section>
 {% endblock %}

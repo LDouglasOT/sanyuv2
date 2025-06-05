@@ -1,0 +1,40 @@
+{% extends "base.html" %}
+
+{% block content %}
+<section class="py-16 bg-white">
+  <div class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
+
+    <article class="bg-gray-50 p-8 rounded-xl shadow-md">
+      <!-- Image -->
+      <img src="{{ service.image_url }}" alt="{{ service.title }}" class="w-full h-64 object-cover rounded-md mb-6">
+
+      <!-- Title -->
+      <h1 class="text-3xl md:text-4xl font-bold text-slate-800 mb-4">{{ service.title }}</h1>
+
+      <!-- Date -->
+      <p class="text-sm text-gray-500 mb-6">
+        Published on {{ service.created_at|date:"F j, Y" }}
+      </p>
+
+      <!-- Content -->
+      <div class="prose max-w-none text-gray-700">
+        <p>{{ service.description }}</p>
+        <!-- If you add a full body field later, replace with: {{ service.body|linebreaks }} -->
+      </div>
+
+      <!-- Back Link -->
+      <div class="mt-8">
+        <a href="javascript:history.back()" class="text-teal-700 font-semibold hover:underline">
+          &larr; Back to News
+        </a>
+      </div>
+    </article>
+
+    <!-- Comments Section -->
+    <div class="mt-12">
+        <p class="text-gray-500">Views count {{service.pageviews}}</p>
+    </div>
+
+  </div>
+</section>
+{% endblock %}

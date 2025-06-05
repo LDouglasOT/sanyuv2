@@ -33,4 +33,8 @@ urlpatterns = [
     path('sanyu/donate/',get_donation_for_sanyu, name='get_donation_for_sanyu'),
     path('our-donors/', ourdonors, name='get_donors'),
     path('partners/', partners_page, name='partners_page'),
+    path('knowledge/', knowledge_base, name='knowledge_page'),
+    path('knowledge-details/<int:id>/', knowledgebase_detail, name='detail'),
+    path('service-details/<int:id>/', service_detail, name='service_detail'),
+    path('diaspora-link/', diaspora_link_coming_soon, name='diaspora_link'),
 ]

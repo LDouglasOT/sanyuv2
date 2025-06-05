@@ -208,7 +208,13 @@ class Speciality(models.Model):
     label = models.CharField(max_length=255)
     image = models.ImageField(upload_to='specialities/', null=True, blank=True)
     image_url = models.URLField(blank=True, null=True)  
-
+    description = models.TextField(blank=True, null=True)
+    is_active = models.BooleanField(default=True, help_text="Is this speciality currently active?")
+    pageviews = models.PositiveIntegerField(default=0, help_text="Number of times this speciality has been viewed")
+    def increment_views(self):
+        self.pageviews += 1
+        self.save()
+        
     def __str__(self):
         return self.title
     
@@ -331,3 +337,32 @@ class Partner(models.Model):
 
     def __str__(self):
         return self.name
+
+
+class knowledgebase(models.Model):
+    title = models.CharField(max_length=255)
+    content = models.TextField()
+    image = models.ImageField(upload_to='knowledgebase/', null=True, blank=True)
+    image_url = models.URLField(blank=True, null=True)
+    created_at = models.DateTimeField(auto_now_add=True)
+    pageviews = models.PositiveIntegerField(default=0, help_text="Number of times this knowledge base article has been viewed")
+    def increment_views(self):
+        self.pageviews += 1
+        self.save()
+
+    def __str__(self):
+        return self.title
+
+    def save(self, *args, **kwargs):
+        if self.image and not self.image_url:
+            self.image_url = upload_image_to_firebase(self.image)
+        super().save(*args, **kwargs)
+
+
+class Comment(models.Model):
+    knowledgebase = models.ForeignKey('KnowledgeBase', on_delete=models.CASCADE, related_name='comments')
+    content = models.TextField()
+    created_at = models.DateTimeField(auto_now_add=True)
+
+    def __str__(self):
+        return f'Comment by {self.user.username} on {self.knowledgebase.title}'
