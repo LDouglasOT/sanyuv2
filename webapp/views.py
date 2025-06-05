@@ -97,7 +97,7 @@ def donate(request):
 
 def appointment(request):
     partners = Partner.objects.all()
-    return render(request, 'appointment.html',{"partners": partners})
+    return render(request, 'Appointment.html',{"partners": partners})
 
 def about(request):
     partners = Partner.objects.all()

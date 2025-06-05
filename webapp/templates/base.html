@@ -167,14 +167,30 @@ body, html, * {
   <li><a href="{% url 'events' %}" class="hover:text-green-800 hover:font-bold {% if request.path == '/events/' %}bg-green-700 text-white{% endif %} active:bg-green-600 px-3 py-2 rounded">Events</a></li>
   <li><a href="{% url 'appointment' %}" class="hover:text-green-800 hover:font-bold {% if request.path == '/appointment/' %}bg-green-700 text-white{% endif %} active:bg-green-600 px-3 py-2 rounded">Appointments</a></li>
   <li><a href="{% url 'donate' %}" class="hover:text-green-800 hover:font-bold {% if request.path == '/donate/' %}bg-green-700 text-white{% endif %} active:bg-green-600 px-3 py-2 rounded">Missions</a></li>
-  <li><a href="{% url 'teams' %}" class="hover:text-green-800 hover:font-bold {% if request.path == '/teams/' %}bg-green-700 text-white{% endif %} active:bg-green-600 px-3 py-2 rounded">Team</a></li>
-  <li><a href="{% url 'services' %}" class="hover:text-green-800 hover:font-bold {% if request.path == '/services/' %}bg-green-700 text-white{% endif %} active:bg-green-600 px-3 py-2 rounded">Services</a></li>
+ <li><a href="{% url 'services' %}" class="hover:text-green-800 hover:font-bold {% if request.path == '/services/' %}bg-green-700 text-white{% endif %} active:bg-green-600 px-3 py-2 rounded">Services</a></li>
   <li><a href="{% url 'partners_page' %}" class="hover:text-green-800 hover:font-bold {% if request.path == '/partners/' %}bg-green-700 text-white{% endif %} active:bg-green-600 px-3 py-2 rounded">Partners</a></li>
-  <li><a href="{% url 'news' %}" class="hover:text-green-800 hover:font-bold {% if request.path == '/news/' %}bg-green-700 text-white{% endif %} active:bg-green-600 px-3 py-2 rounded">News</a></li>
-  <li><a href="{% url 'about' %}" class="hover:text-green-800 hover:font-bold {% if request.path == '/about/' %}bg-green-700 text-white{% endif %} active:bg-green-600 px-3 py-2 rounded">About</a></li>
-  <li><a href="{% url 'contact' %}" class="hover:text-green-800 hover:font-bold {% if request.path == '/contact/' %}bg-green-700 text-white{% endif %} active:bg-green-600 px-3 py-2 rounded">Contact</a></li>
   <li><a href="{% url 'knowledge_page' %}" class="hover:text-green-800 hover:font-bold {% if request.path == '/knowledge/' %}bg-green-700 text-white{% endif %} active:bg-green-600 px-3 py-2 rounded">Knowledge base</a></li>
-  <li><a href="{% url 'diaspora_link' %}" class="hover:text-green-800 hover:font-bold {% if request.path == '/diaspora-link/' %}bg-green-700 text-white{% endif %} active:bg-green-600 px-3 py-2 rounded">Diaspora</a></li>
+
+<div class="dropdown">
+<div tabindex="0" role="button" class="m-1 flex items-center" onclick="toggleDropdown()">
+  More
+  <svg id="dropdown-arrow" class="ml-1 h-10 w-4 transform transition-transform duration-200" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor">
+    <path fill-rule="evenodd" d="M5.23 7.21a.75.75 0 011.06.02L10 10.94l3.71-3.71a.75.75 0 111.06 1.06l-4.24 4.24a.75.75 0 01-1.06 0L5.23 8.27a.75.75 0 01.02-1.06z" clip-rule="evenodd" />
+  </svg>
+</div>
+  <div
+    tabindex="0"
+    class="dropdown-content card card-sm bg-base-100 z-10 w-64 shadow-md">
+    <div class="card-body">
+    <li><a href="{% url 'about' %}" class="hover:text-green-800 hover:font-bold {% if request.path == '/about/' %}bg-green-700 text-white{% endif %} active:bg-green-600 px-3 py-2 rounded">About</a></li>
+    <li><a href="{% url 'contact' %}" class="hover:text-green-800 hover:font-bold {% if request.path == '/contact/' %}bg-green-700 text-white{% endif %} active:bg-green-600 px-3 py-2 rounded">Contact</a></li>
+    <li><a href="{% url 'knowledge_page' %}" class="hover:text-green-800 hover:font-bold {% if request.path == '/knowledge/' %}bg-green-700 text-white{% endif %} active:bg-green-600 px-3 py-2 rounded">Knowledge base</a></li>
+    <li><a href="{% url 'teams' %}" class="hover:text-green-800 hover:font-bold {% if request.path == '/teams/' %}bg-green-700 text-white{% endif %} active:bg-green-600 px-3 py-2 rounded">Team</a></li>
+    <li><a href="{% url 'diaspora_link' %}" class="hover:text-green-800 hover:font-bold {% if request.path == '/diaspora-link/' %}bg-green-700 text-white{% endif %} active:bg-green-600 px-3 py-2 rounded">Diaspora</a></li>
+    
+    </div>
+  </div>
+</div>
 
 </ul>
 
@@ -250,8 +266,7 @@ body, html, * {
         <li><a href="{% url 'appointment' %}" class="hover:text-white">Book an Appointment</a></li>
         <li><a href="{% url 'donate' %}" class="hover:text-white">Please donate</a></li>
         <li><a href="#" class="hover:text-white">About Us</a></li>
-        <li><a href="#" class="hover:text-white">Departments</a></li>
-        <li><a href="#" class="hover:text-white">Appointments</a></li>
+        <li><a href="{% url 'appointment' %}" class="hover:text-white">Appointments</a></li>
       </ul>
     </div>
 
