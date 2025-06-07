@@ -160,61 +160,132 @@ Your generosity fuels our mission, and we are deeply grateful for your support.
 
 
   <hr class="">
-  <div class="max-w-5xl mx-auto py-12 px-14">
-<div class="bg-white rounded shadow-md w-full p-2 bg-green-50">
-    <h2 class="text-2xl font-semibold mb-6 text-center">Pesapal Payment(Visa, mastercards, mobile money, eezypay)</h2>
- <form id="payment-form" class="grid grid-cols-1 md:grid-cols-2 gap-4 max-w-3xl mx-auto p-6 bg-white rounded-xl shadow-md">
+ <div class="max-w-5xl mx-auto py-12 px-14">
+  <div class="bg-gradient-to-tr from-yellow-100 via-pink-100 to-orange-100 rounded-3xl shadow-2xl w-full p-8 border border-pink-300">
+    <h2 class="text-3xl font-bold mb-8 text-center text-pink-700">
+      💳 Pesapal Payment (Visa, Mastercards, Mobile Money, EezyPay)
+    </h2>
 
-  <!-- Left Column -->
-  <input type="email" id="email_address" placeholder="Email Address" required class="w-full px-4 py-2 border rounded focus:outline-none focus:ring-2 ring-blue-300"/>
-  <input type="text" id="phone_number" placeholder="Phone Number" required class="w-full px-4 py-2 border rounded focus:outline-none focus:ring-2 ring-blue-300"/>
+    <form id="payment-form" class="grid grid-cols-1 md:grid-cols-2 gap-6 max-w-3xl mx-auto p-6 bg-white rounded-2xl shadow-lg border border-pink-200">
 
-  <input type="text" id="first_name" placeholder="First Name" required class="w-full px-4 py-2 border rounded focus:outline-none focus:ring-2 ring-blue-300"/>
-  <input type="text" id="last_name" placeholder="Last Name" required class="w-full px-4 py-2 border rounded focus:outline-none focus:ring-2 ring-blue-300"/>
+      <!-- Inputs -->
+      <input type="email" id="email_address" placeholder="📧 Email Address" required
+        class="w-full px-5 py-3 rounded-xl border-2 border-pink-200 focus:ring-4 focus:ring-pink-300 shadow-sm bg-white placeholder-pink-400 transition duration-200 focus:outline-none" />
 
-  <input type="text" id="line_1" placeholder="Address Line 1" required class="w-full px-4 py-2 border rounded focus:outline-none focus:ring-2 ring-blue-300"/>
-  <input type="text" id="city" placeholder="City" required class="w-full px-4 py-2 border rounded focus:outline-none focus:ring-2 ring-blue-300"/>
+      <input type="text" id="phone_number" placeholder="📱 Phone Number" required
+        class="w-full px-5 py-3 rounded-xl border-2 border-pink-200 focus:ring-4 focus:ring-pink-300 shadow-sm bg-white placeholder-pink-400 transition duration-200 focus:outline-none" />
 
-  <input type="number" id="amount" placeholder="Amount" min="1" step="0.01" required class="w-full px-4 py-2 border rounded focus:outline-none focus:ring-2 ring-blue-300"/>
-  <select id="currency" required class="w-full px-4 py-2 border rounded focus:outline-none focus:ring-2 ring-blue-300">
-    <option value="">Select Currency</option>
-    <option value="KES">KES - Kenyan Shilling</option>
-    <option value="UGX">UGX - Ugandan Shilling</option>
-    <option value="TZS">TZS - Tanzanian Shilling</option>
-    <option value="RWF">RWF - Rwandan Franc</option>
-    <option value="USD">USD - US Dollar</option>
-  </select>
+      <input type="text" id="first_name" placeholder="😊 First Name" required
+        class="w-full px-5 py-3 rounded-xl border-2 border-pink-200 focus:ring-4 focus:ring-pink-300 shadow-sm bg-white placeholder-pink-400 transition duration-200 focus:outline-none" />
 
-  <select id="department" required class="w-full px-4 py-2 border rounded focus:outline-none focus:ring-2 ring-blue-300">
-    <option disabled selected>Pick a Deparment to donate to</option>
-    {%for dep in departments%}
-    <option>{{dep.name}}</option>
-    {% endfor %}
-  </select>
+      <input type="text" id="last_name" placeholder="🧑 Last Name" required
+        class="w-full px-5 py-3 rounded-xl border-2 border-pink-200 focus:ring-4 focus:ring-pink-300 shadow-sm bg-white placeholder-pink-400 transition duration-200 focus:outline-none" />
 
+      <input type="text" id="line_1" placeholder="🏠 Address Line 1" required
+        class="w-full px-5 py-3 rounded-xl border-2 border-pink-200 focus:ring-4 focus:ring-pink-300 shadow-sm bg-white placeholder-pink-400 transition duration-200 focus:outline-none" />
 
-  <!-- Full-width Submit Button -->
-  <div class="md:col-span-2">
-    <button type="submit" id="submit-btn" class="w-full bg-blue-500 text-white py-2 rounded hover:bg-blue-600 transition duration-200">
-      Donate
-    </button>
+      <input type="text" id="city" placeholder="🌆 City" required
+        class="w-full px-5 py-3 rounded-xl border-2 border-pink-200 focus:ring-4 focus:ring-pink-300 shadow-sm bg-white placeholder-pink-400 transition duration-200 focus:outline-none" />
+
+      <input type="number" id="amount" placeholder="💰 Amount" min="1" step="0.01" required
+        class="w-full px-5 py-3 rounded-xl border-2 border-pink-200 focus:ring-4 focus:ring-pink-300 shadow-sm bg-white placeholder-pink-400 transition duration-200 focus:outline-none" />
+
+      <select id="currency" required
+        class="w-full px-5 py-3 rounded-xl border-2 border-pink-200 focus:ring-4 focus:ring-pink-300 shadow-sm bg-white text-pink-700 transition duration-200 focus:outline-none">
+        <option value="" disabled selected>💱 Select Currency</option>
+        <option value="KES">KES - Kenyan Shilling</option>
+        <option value="UGX">UGX - Ugandan Shilling</option>
+        <option value="TZS">TZS - Tanzanian Shilling</option>
+        <option value="RWF">RWF - Rwandan Franc</option>
+        <option value="USD">USD - US Dollar</option>
+      </select>
+
+      <select id="department" required
+        class="w-full px-5 py-3 rounded-xl border-2 border-pink-200 focus:ring-4 focus:ring-pink-300 shadow-sm bg-white text-pink-700 transition duration-200 focus:outline-none">
+        <option disabled selected>🏢 Pick a Department to donate to</option>
+        {% for dep in departments %}
+          <option>{{ dep.name }}</option>
+        {% endfor %}
+      </select>
+
+      <!-- Submit button -->
+      <div class="md:col-span-2">
+        <button type="submit" id="submit-btn"
+          class="w-full bg-gradient-to-r from-pink-400 to-yellow-400 text-white font-semibold py-3 rounded-xl shadow-md hover:from-pink-500 hover:to-yellow-500 transition duration-300 text-xl">
+          🚀 Donate
+        </button>
+      </div>
+
+      <!-- Loader -->
+      <div id="loader" class="md:col-span-2 flex justify-center mt-4 hidden">
+    <svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" viewBox="0 0 100 100" preserveAspectRatio="xMidYMid" width="200" height="200" style="shape-rendering: auto; display: block;">
+  <g><g transform="translate(80,50)">
+    <g transform="rotate(0)">
+      <circle fill-opacity="1" fill="#ff727d" r="6" cy="0" cx="0">
+        <animateTransform repeatCount="indefinite" dur="1s" keyTimes="0;1" values="1.5 1.5;1 1" begin="-0.875s" type="scale" attributeName="transform"/>
+        <animate begin="-0.875s" values="1;0" repeatCount="indefinite" dur="1s" keyTimes="0;1" attributeName="fill-opacity"/>
+      </circle>
+    </g>
+  </g><g transform="translate(71.21320343559643,71.21320343559643)">
+    <g transform="rotate(45)">
+      <circle fill-opacity="0.875" fill="#ff727d" r="6" cy="0" cx="0">
+        <animateTransform repeatCount="indefinite" dur="1s" keyTimes="0;1" values="1.5 1.5;1 1" begin="-0.75s" type="scale" attributeName="transform"/>
+        <animate begin="-0.75s" values="1;0" repeatCount="indefinite" dur="1s" keyTimes="0;1" attributeName="fill-opacity"/>
+      </circle>
+    </g>
+  </g><g transform="translate(50,80)">
+    <g transform="rotate(90)">
+      <circle fill-opacity="0.75" fill="#ff727d" r="6" cy="0" cx="0">
+        <animateTransform repeatCount="indefinite" dur="1s" keyTimes="0;1" values="1.5 1.5;1 1" begin="-0.625s" type="scale" attributeName="transform"/>
+        <animate begin="-0.625s" values="1;0" repeatCount="indefinite" dur="1s" keyTimes="0;1" attributeName="fill-opacity"/>
+      </circle>
+    </g>
+  </g><g transform="translate(28.786796564403577,71.21320343559643)">
+    <g transform="rotate(135)">
+      <circle fill-opacity="0.625" fill="#ff727d" r="6" cy="0" cx="0">
+        <animateTransform repeatCount="indefinite" dur="1s" keyTimes="0;1" values="1.5 1.5;1 1" begin="-0.5s" type="scale" attributeName="transform"/>
+        <animate begin="-0.5s" values="1;0" repeatCount="indefinite" dur="1s" keyTimes="0;1" attributeName="fill-opacity"/>
+      </circle>
+    </g>
+  </g><g transform="translate(20,50.00000000000001)">
+    <g transform="rotate(180)">
+      <circle fill-opacity="0.5" fill="#ff727d" r="6" cy="0" cx="0">
+        <animateTransform repeatCount="indefinite" dur="1s" keyTimes="0;1" values="1.5 1.5;1 1" begin="-0.375s" type="scale" attributeName="transform"/>
+        <animate begin="-0.375s" values="1;0" repeatCount="indefinite" dur="1s" keyTimes="0;1" attributeName="fill-opacity"/>
+      </circle>
+    </g>
+  </g><g transform="translate(28.78679656440357,28.786796564403577)">
+    <g transform="rotate(225)">
+      <circle fill-opacity="0.375" fill="#ff727d" r="6" cy="0" cx="0">
+        <animateTransform repeatCount="indefinite" dur="1s" keyTimes="0;1" values="1.5 1.5;1 1" begin="-0.25s" type="scale" attributeName="transform"/>
+        <animate begin="-0.25s" values="1;0" repeatCount="indefinite" dur="1s" keyTimes="0;1" attributeName="fill-opacity"/>
+      </circle>
+    </g>
+  </g><g transform="translate(49.99999999999999,20)">
+    <g transform="rotate(270)">
+      <circle fill-opacity="0.25" fill="#ff727d" r="6" cy="0" cx="0">
+        <animateTransform repeatCount="indefinite" dur="1s" keyTimes="0;1" values="1.5 1.5;1 1" begin="-0.125s" type="scale" attributeName="transform"/>
+        <animate begin="-0.125s" values="1;0" repeatCount="indefinite" dur="1s" keyTimes="0;1" attributeName="fill-opacity"/>
+      </circle>
+    </g>
+  </g><g transform="translate(71.21320343559643,28.78679656440357)">
+    <g transform="rotate(315)">
+      <circle fill-opacity="0.125" fill="#ff727d" r="6" cy="0" cx="0">
+        <animateTransform repeatCount="indefinite" dur="1s" keyTimes="0;1" values="1.5 1.5;1 1" begin="0s" type="scale" attributeName="transform"/>
+        <animate begin="0s" values="1;0" repeatCount="indefinite" dur="1s" keyTimes="0;1" attributeName="fill-opacity"/>
+      </circle>
+    </g>
+  </g><g/></g><!-- [ldio] generated by https://loading.io -->
+</svg>
+
+      </div>
+
+      <!-- Message -->
+      <div id="message" class="md:col-span-2 text-center text-pink-600 mt-4 font-medium"></div>
+    </form>
   </div>
+</div>
 
-  <!-- Loader -->
-  <div id="loader" class="md:col-span-2 flex justify-center mt-2 hidden">
-    <svg class="animate-spin h-5 w-5 text-blue-500" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24">
-      <circle class="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" stroke-width="4"></circle>
-      <path class="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8v8H4z"></path>
-    </svg>
-  </div>
-
-  <!-- Message -->
-  <div id="message" class="md:col-span-2 text-center text-red-500 mt-2"></div>
-</form>
-
-
-  </div>
-  </div>
 
 
 
@@ -234,45 +305,61 @@ Your generosity fuels our mission, and we are deeply grateful for your support.
 
 </section>
 
-    <h2 class="text-2xl font-semibold mb-6 text-center">EQUIPMENT DONATION FORM</h2>
-  
-<div class="max-w-2xl mx-auto p-6 bg-white rounded-xl shadow-md mt-10">
-  <h2 class="text-2xl font-bold mb-4 text-center text-green-700">Donate Equipment</h2>
+<div class="max-w-4xl mx-auto py-12 px-6">
+  <div class="bg-gradient-to-tr from-yellow-100 via-pink-100 to-orange-100 rounded-3xl shadow-2xl p-10 border border-pink-200">
+    <h2 class="text-4xl font-bold text-center text-pink-700 mb-6">
+      🎁 Donate Equipment
+    </h2>
 
-  <form id="equipment-donation" action="https://formspree.io/f/mjkrkwbj" method="POST">
-    <!-- Donor Info -->
-    <div class="grid grid-cols-1 md:grid-cols-2 gap-4 mb-4">
-      <input type="text" name="first_name" placeholder="First Name" required class="border px-4 py-2 rounded w-full focus:ring-2 ring-green-300">
-      <input type="text" name="last_name" placeholder="Last Name" required class="border px-4 py-2 rounded w-full focus:ring-2 ring-green-300">
-      <input type="email" name="email" placeholder="Email Address" required class="border px-4 py-2 rounded w-full focus:ring-2 ring-green-300">
-      <input type="tel" name="phone" placeholder="Phone Number" class="border px-4 py-2 rounded w-full focus:ring-2 ring-green-300">
-    </div>
+    <form id="equipment-donation" action="https://formspree.io/f/mjkrkwbj" method="POST" class="space-y-6">
+      <!-- Donor Info -->
+      <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+        <input type="text" name="first_name" placeholder="😊 First Name" required
+          class="w-full px-5 py-3 rounded-xl border-2 border-pink-200 focus:ring-4 focus:ring-pink-300 shadow-sm bg-white placeholder-pink-400 transition duration-200" />
+        <input type="text" name="last_name" placeholder="🧑 Last Name" required
+          class="w-full px-5 py-3 rounded-xl border-2 border-pink-200 focus:ring-4 focus:ring-pink-300 shadow-sm bg-white placeholder-pink-400 transition duration-200" />
+        <input type="email" name="email" placeholder="📧 Email Address" required
+          class="w-full px-5 py-3 rounded-xl border-2 border-pink-200 focus:ring-4 focus:ring-pink-300 shadow-sm bg-white placeholder-pink-400 transition duration-200" />
+        <input type="tel" name="phone" placeholder="📱 Phone Number"
+          class="w-full px-5 py-3 rounded-xl border-2 border-pink-200 focus:ring-4 focus:ring-pink-300 shadow-sm bg-white placeholder-pink-400 transition duration-200" />
+      </div>
 
-    <!-- Equipment Info -->
-    <div class="mb-4">
-      <input type="text" name="equipment_name" placeholder="Equipment Name" required class="border px-4 py-2 rounded w-full focus:ring-2 ring-green-300">
-    </div>
-    <div class="mb-4">
-      <textarea name="equipment_description" rows="4" placeholder="Description of Equipment" required class="border px-4 py-2 rounded w-full focus:ring-2 ring-green-300"></textarea>
-    </div>
-    <div class="mb-4">
-      <input type="text" name="condition" placeholder="Condition (e.g. New, Used)" required class="border px-4 py-2 rounded w-full focus:ring-2 ring-green-300">
-    </div>
+      <!-- Equipment Info -->
+      <div>
+        <input type="text" name="equipment_name" placeholder="📦 Equipment Name" required
+          class="w-full px-5 py-3 rounded-xl border-2 border-pink-200 focus:ring-4 focus:ring-pink-300 shadow-sm bg-white placeholder-pink-400 transition duration-200" />
+      </div>
+      <div>
+        <textarea name="equipment_description" rows="4" placeholder="📝 Description of Equipment" required
+          class="w-full px-5 py-3 rounded-xl border-2 border-pink-200 focus:ring-4 focus:ring-pink-300 shadow-sm bg-white placeholder-pink-400 transition duration-200 resize-none"></textarea>
+      </div>
+      <div>
+        <input type="text" name="condition" placeholder="⚙️ Condition (e.g. New, Used)" required
+          class="w-full px-5 py-3 rounded-xl border-2 border-pink-200 focus:ring-4 focus:ring-pink-300 shadow-sm bg-white placeholder-pink-400 transition duration-200" />
+      </div>
 
-    <!-- Address -->
-    <div class="grid grid-cols-1 md:grid-cols-2 gap-4 mb-4">
-      <input type="text" name="address_line" placeholder="Address Line" class="border px-4 py-2 rounded w-full focus:ring-2 ring-green-300">
-      <input type="text" name="city" placeholder="City" class="border px-4 py-2 rounded w-full focus:ring-2 ring-green-300">
-    </div>
+      <!-- Address Info -->
+      <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+        <input type="text" name="line_1" placeholder="🏠 Address Line 1" required
+          class="w-full px-5 py-3 rounded-xl border-2 border-pink-200 focus:ring-4 focus:ring-pink-300 shadow-sm bg-white placeholder-pink-400 transition duration-200" />
+        <input type="text" name="city" placeholder="🌆 City" required
+          class="w-full px-5 py-3 rounded-xl border-2 border-pink-200 focus:ring-4 focus:ring-pink-300 shadow-sm bg-white placeholder-pink-400 transition duration-200" />
+      </div>
 
-    <!-- Submit -->
-     <br>
-    <div class="text-center">
-      <button type="submit" class="bg-green-600 text-white px-6 py-2 rounded hover:bg-green-700 transition w-full">Submit Donation</button>
-    </div>
-    <br>
-  </form>
+      <button type="submit" id="submit-btn"
+        class="w-full bg-gradient-to-r from-pink-400 to-yellow-400 text-white font-semibold py-3 rounded-xl shadow-md hover:from-pink-500 hover:to-yellow-500 transition duration-300 text-xl">
+        🚀 Donate Now
+      </button>
+
+      <div id="loader" class="flex justify-center mt-4 hidden">
+        <!-- You can reuse your SVG loader here -->
+      </div>
+
+      <div id="message" class="text-center text-red-500 mt-4 font-medium"></div>
+    </form>
+  </div>
 </div>
+
 
 
 <!-- Floating Button -->

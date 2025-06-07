@@ -270,14 +270,14 @@ def get_transaction_status_method(order_tracking_id):
 def teams_view(request):
     doctors = Doctor.objects.all().order_by('position')
     partners = Partner.objects.all()
-    return render(request, 'team.html', {'doctors': doctors,partners: partners})
+    return render(request, 'team.html', {'doctors': doctors,"partners": partners})
 
 
 
 def news_section(request):
     news = NewsItem.objects.all()  # Show recent 6
     partners = Partner.objects.all()
-    return render(request, "News.html", {"news": news,partners: partners})
+    return render(request, "News.html", {"news": news,"partners": partners})
 
 
 def news_detail(request, id):
@@ -285,13 +285,13 @@ def news_detail(request, id):
     news_item = get_object_or_404(NewsItem, id=id)
     print(news_item)
     partners = Partner.objects.all()
-    return render(request, "news_detail.html", {"news_item": news_item,partners: partners})
+    return render(request, "news_detail.html", {"news_item": news_item,"partners": partners})
 
 
 def services_view(request):
     partners = Partner.objects.all()
     specialities = Speciality.objects.all()
-    return render(request, 'services.html', {'services': specialities,partners: partners})
+    return render(request, 'services.html', {'services': specialities,"partners": partners})
 
 
 
@@ -369,8 +369,10 @@ def knowledgebase_detail(request, id):
 def service_detail(request, id):
     service = get_object_or_404(Speciality, pk=id)
     service.increment_views()
-    return render(request, 'service_details.html', {'service': service})
+    partners = Partner.objects.all()
+    return render(request, 'service_details.html', {'service': service, 'partners': partners})
 
 
 def diaspora_link_coming_soon(request):
-    return render(request, 'diaspora_link_coming_soon.html')
+    partners = Partner.objects.all()
+    return render(request, 'diaspora_link_coming_soon.html', {'partners': partners})
