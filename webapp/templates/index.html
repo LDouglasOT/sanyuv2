@@ -35,7 +35,7 @@
       this.activeSlide = index;
     },
     init() {
-      setInterval(() => this.next(), 7000);
+      setInterval(() => this.next(), 2000);
     }
   }"
   x-init="init"
@@ -46,10 +46,10 @@
   <template x-for="(slide, index) in slides" :key="index">
     <div
       x-show="activeSlide === index"
-      x-transition:enter="transition-opacity duration-1000"
+      x-transition:enter="transition-opacity duration-300"
       x-transition:enter-start="opacity-0"
       x-transition:enter-end="opacity-100"
-      x-transition:leave="transition-opacity duration-1000"
+      x-transition:leave="transition-opacity duration-300"
       x-transition:leave-start="opacity-100"
       x-transition:leave-end="opacity-0"
       class="absolute inset-0 bg-cover bg-center"
