@@ -31,8 +31,7 @@ def events(request):
 
 def index(request):
     facilities = Facility.objects.all()
-    partners = Partner.objects.all()
-    print(partners)
+    
     news = NewsItem.objects.order_by('-created_at')[:6]
     slides = Slide.objects.all()
     specialities = Speciality.objects.all()
@@ -49,15 +48,14 @@ def index(request):
         'facilities': facilities,
         'news': news, 
         'services': services,
-        'partners': partners,
     })
 
 
 
 def contact(request):
     banks = BankDs.objects.filter(is_active=True)
-    partners = Partner.objects.all()
-    return render(request, 'contact.html' ,{'banks': banks,"partners":partners})  
+    
+    return render(request, 'contact.html' ,{'banks': banks})  
 
 from django.shortcuts import render
 from django.utils import timezone
@@ -69,11 +67,10 @@ from .models import MedicalOutreach, Donor
 def outreach_detail(request, id):
     outreach = get_object_or_404(MedicalOutreach, id=id)
     donors = outreach.donors.all().order_by('-amount')
-    partners = Partner.objects.all()
+    
     return render(request, 'outreach_detail.html', {
         'outreach': outreach,
         'donors': donors,
-        "partners": partners,
     })
 
 
@@ -86,26 +83,26 @@ def donate(request):
     # Assuming your model's image field is `image` and you want the URL in template as `image_url`,
     # you can annotate or add a property on the model or transform here.
     # For simplicity, we just rely on image.url in the template or adapt below if needed.
-    partners = Partner.objects.all()
+    
     context = {
         'upcoming_outreaches': upcoming_outreaches,
         'past_outreaches': past_outreaches,
-         'partners':partners
+         
     }
     return render(request, 'donate.html', context)
 
 
 def appointment(request):
-    partners = Partner.objects.all()
-    return render(request, 'Appointment.html',{"partners": partners})
+    
+    return render(request, 'Appointment.html',{})
 
 def about(request):
-    partners = Partner.objects.all()
-    return render(request, 'about.html',{"partners": partners})
+    
+    return render(request, 'about.html',{})
 
 def calls(request):
-    partners = Partner.objects.all()
-    return render(request, 'calls.html',{partners: partners})
+    
+    return render(request, 'calls.html',{})
 
 
 def submit_call_request(request):
@@ -202,13 +199,13 @@ def upcoming_outreach_detail(request, id):
             print('Formspree error:', str(e))
 
         return redirect('thank-you')
-    partners = Partner.objects.all()
+    
     return render(request, 'upcoming_outreach_detail.html', {
         'outreach': outreach,
         'donors': donors,
         'form': form,
         'banks': banks,
-        partners: partners,
+      
     })
 
 
@@ -218,7 +215,7 @@ def thanks(request):
     response = get_transaction_status_method(order_tracking_id)  # Call the method to get transaction status
     print(response.get("status"))
     payment = Payments.objects.filter(transaction_id=order_tracking_id).first()  # Fetch the payment using the tracking ID
-    partners = Partner.objects.all()
+    
     print(payment)
     if not payment:
         return render(request, 'thanks.html', {"error": "Payment not found"})          
@@ -230,13 +227,13 @@ def thanks(request):
                 
                 payment.transaction_id = order_tracking_id  # Update tracking ID if needed
                 payment.save()
-                return render(request, 'thanks.html', {"status": "Payment verification successful", "FirstName": payment.firstname, "LastName": payment.lastname, "Email": payment.email, "Phone": payment.phone, "Country": payment.country, "Amount": payment.amount,"currency": payment.currency,partners:partners})
+                return render(request, 'thanks.html', {"status": "Payment verification successful", "FirstName": payment.firstname, "LastName": payment.lastname, "Email": payment.email, "Phone": payment.phone, "Country": payment.country, "Amount": payment.amount,"currency": payment.currency,})
             else:
-                return render(request, 'thanks.html',{"FirstName": payment.firstname, "LastName": payment.lastname, "Email": payment.email, "Phone": payment.phone, "Country": payment.country, "Amount": payment.amount,"error": 'Payment verification failed',partners:partners, "currency": payment.currency,"message": "Dear {}, your payment of {} {} was not successful. We are constantly checking for its status, don't close this page so we can verify it".format(payment.firstname, payment.amount, payment.currency)})
+                return render(request, 'thanks.html',{"FirstName": payment.firstname, "LastName": payment.lastname, "Email": payment.email, "Phone": payment.phone, "Country": payment.country, "Amount": payment.amount,"error": 'Payment verification failed', "currency": payment.currency,"message": "Dear {}, your payment of {} {} was not successful. We are constantly checking for its status, don't close this page so we can verify it".format(payment.firstname, payment.amount, payment.currency)})
         except Exception as e:
             print(f"Error processing payment: {str(e)}")
 
-            return render(request, 'thanks.html', {"error": "Payment not found",partners: partners})
+            return render(request, 'thanks.html', {"error": "Payment not found"})
     else:
         return render(request, 'thanks.html')
 
@@ -269,35 +266,35 @@ def get_transaction_status_method(order_tracking_id):
 
 def teams_view(request):
     doctors = Doctor.objects.all().order_by('position')
-    partners = Partner.objects.all()
-    return render(request, 'team.html', {'doctors': doctors,"partners": partners})
+    
+    return render(request, 'team.html', {'doctors': doctors,})
 
 
 
 def news_section(request):
     news = NewsItem.objects.all()  # Show recent 6
-    partners = Partner.objects.all()
-    return render(request, "News.html", {"news": news,"partners": partners})
+    
+    return render(request, "News.html", {"news": news,})
 
 
 def news_detail(request, id):
     print(f"Fetching news item with ID: {id}")
     news_item = get_object_or_404(NewsItem, id=id)
     print(news_item)
-    partners = Partner.objects.all()
-    return render(request, "news_detail.html", {"news_item": news_item,"partners": partners})
+    
+    return render(request, "news_detail.html", {"news_item": news_item,})
 
 
 def services_view(request):
-    partners = Partner.objects.all()
+    
     specialities = Speciality.objects.all()
-    return render(request, 'services.html', {'services': specialities,"partners": partners})
+    return render(request, 'services.html', {'services': specialities,})
 
 
 
 def pesapal_redirect(request):
-    partners = Partner.objects.all()
-    return render(request, 'payment_redirect.html',{partners: partners})
+    
+    return render(request, 'payment_redirect.html',{})
 
 
 @csrf_exempt  # Use with caution; ensure proper security measures are in place
@@ -327,25 +324,25 @@ def get_donation_for_sanyu(request):
 
     banks = BankDs.objects.filter(is_active=True).first()
     departments = Departments.objects.all()
-    partners = Partner.objects.all()
+    
     return render(request, 'Equip.html', {    
         'banks': banks,
         'departments': departments,
-        partners: partners
+       
     })
 
 
 
 def ourdonors(request):
     donors = Payments.objects.all().order_by('-amount')
-    partners = Partner.objects.all()
-    return render(request, 'donors.html', {'donors': donors,partners: partners})
+    
+    return render(request, 'donors.html', {'donors': donors})
 
 
 
 def partners_page(request):
-    partners = Partner.objects.all()
-    return render(request, 'partners_page.html', {'partners': partners})
+    
+    return render(request, 'partners_page.html', {})
 
 
 def knowledge_base(request):
@@ -369,10 +366,10 @@ def knowledgebase_detail(request, id):
 def service_detail(request, id):
     service = get_object_or_404(Speciality, pk=id)
     service.increment_views()
-    partners = Partner.objects.all()
-    return render(request, 'service_details.html', {'service': service, 'partners': partners})
+    
+    return render(request, 'service_details.html', {'service': service, })
 
 
 def diaspora_link_coming_soon(request):
-    partners = Partner.objects.all()
-    return render(request, 'diaspora_link_coming_soon.html', {'partners': partners})
+    
+    return render(request, 'diaspora_link_coming_soon.html', {})
