@@ -35,7 +35,7 @@
       this.activeSlide = index;
     },
     init() {
-      setInterval(() => this.next(), 2000);
+      setInterval(() => this.next(), 3800);
     }
   }"
   x-init="init"
@@ -108,7 +108,7 @@
         startAutoSlide() {
           this.intervalId = setInterval(() => {
             this.current = (this.current + 1) % this.services.length;
-          }, 2000);  // change slide every 4 seconds
+          }, 3800);  // change slide every 4 seconds
         },
         stopAutoSlide() {
           clearInterval(this.intervalId);
