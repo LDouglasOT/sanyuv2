@@ -34,7 +34,7 @@ Your generosity fuels our mission, and we are deeply grateful for your support.
 
 
 
-<section class="bg-base-100 py-16 px-6 md:px-20">
+<section class="bg-base-100 py-16 px-6 md:px-20 bg-gradient-to-tr from-yellow-100 via-pink-100 to-orange-100 rounded-3xl shadow-2xl p-10 border border-pink-200">
   <div class="max-w-3xl mx-auto text-center">
     <h2 class="text-3xl md:text-4xl font-bold text-primary mb-6">Support Sanyu Hospital</h2>
     <p class="text-base-content mb-10">
@@ -44,7 +44,7 @@ Your generosity fuels our mission, and we are deeply grateful for your support.
    
     <div class="space-y-6 text-left">
       <!-- Bank Account -->
-      <div class="bg-base-200 rounded-box p-4 flex justify-between items-center">
+      <div class="bg-gradient-to-tr from-yellow-100 via-pink-100 to-orange-100 rounded-3xl shadow-2xl p-10 border border-pink-200 rounded-box flex justify-between items-center">
         <div>
           <p class="font-semibold text-base-content">Bank Account (UGX)</p>
           <p id="bank-info" class="text-sm opacity-80">
@@ -61,7 +61,7 @@ Your generosity fuels our mission, and we are deeply grateful for your support.
   </div>
   <br>
   <div class="dropdown w-full">
-  <div tabindex="0" role="button" class="btn m-1 w-full">How To Do Bank Transfers</div>
+  <div tabindex="0" role="button" class="btn m-1 w-full bg-gradient-to-tr from-yellow-100 via-pink-100 to-orange-100 rounded-3xl shadow-2xl border border-pink-200">How To Do Bank Transfers</div>
   <div
     tabindex="0"
     class="dropdown-content card card-sm bg-base-100 z-1 w-full shadow-md">
@@ -364,13 +364,43 @@ Your generosity fuels our mission, and we are deeply grateful for your support.
 
 <!-- Floating Button -->
 <button id="issue-button"
-  class="fixed bottom-80 h-80 right-80 md:right-0 bg-teal-900 text-white px-4 py-2 text-sm rounded shadow-md hover:bg-red-600 z-50">
+  class="hidden md:block md:fixed bottom-80 h-80 right-80 md:right-0 bg-teal-900 text-white px-4 py-2 text-sm rounded shadow-md hover:bg-red-600 z-50">
   <div>
     <h1 class="underling font-bold text-xl">Donation issues?</h1>
     <p class="flex wrap">Hello our dear donor,<br> please click here if you <br> are facing issues donating <br> via our page. <br> We will reach out <br> to you so we can help</p>
   </div>
   <div class="bg-green-500 rounded py-8 my-2 text-xl">Help</div>
 </button>
+<button id="mobile-issue-button"
+  class="fixed bottom-4 right-4 bg-teal-900 text-white px-3 py-2 text-xs rounded-full shadow-md hover:bg-red-600 z-50 md:hidden">
+  Donation issues ?
+</button>
+
+<!-- Hidden Form Above the Button -->
+<div id="issue-form"
+  class="hidden fixed bottom-16 right-4 bg-white border border-gray-300 rounded-lg shadow-lg p-4 w-72 z-50 md:hidden">
+  <h2 class="text-sm font-bold mb-2">Facing a Donation Issue?</h2>
+  <form id="help-form" class="space-y-2">
+    <input type="text" name="name" placeholder="Full Name"
+      class="w-full border rounded px-2 py-1 text-sm focus:outline-none focus:ring-2 focus:ring-teal-500" required>
+    <input type="text" name="contact" placeholder="Phone or Email"
+      class="w-full border rounded px-2 py-1 text-sm focus:outline-none focus:ring-2 focus:ring-teal-500" required>
+    <textarea name="issue" placeholder="Brief description of the issue"
+      class="w-full border rounded px-2 py-1 text-sm focus:outline-none focus:ring-2 focus:ring-teal-500" rows="3" required></textarea>
+    <button type="submit"
+      class="bg-teal-700 text-white w-full py-1 rounded hover:bg-teal-800 text-sm">Submit</button>
+  </form>
+</div>
+
+<!-- Script to Toggle Form -->
+<script>
+  const helpBtn = document.getElementById('mobile-issue-button');
+  const form = document.getElementById('issue-form');
+
+  helpBtn.addEventListener('click', () => {
+    form.classList.toggle('hidden');
+  });
+</script>
 
 <!-- Popup Form -->
 <div id="issue-popup"
