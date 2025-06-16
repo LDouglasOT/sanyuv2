@@ -59,6 +59,6 @@ node_modules/
 # Local settings
 local_settings.py
 firebase-adminsdk.json
-
+db.sqlite3
 
 .env
