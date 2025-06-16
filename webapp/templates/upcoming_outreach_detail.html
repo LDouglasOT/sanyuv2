@@ -38,20 +38,38 @@
  <h2 class="text-2xl font-semibold mb-6 text-center">Direct Bank Transfers</h2>
    
     <div class="space-y-6 text-left">
-      <!-- Bank Account -->
-      <div class="bg-gradient-to-tr from-yellow-100 via-pink-100 to-orange-100 rounded-3xl shadow-2xl p-10 border border-pink-200 rounded-box flex justify-between items-center">
-        <div>
-          <p class="font-semibold text-base-content">Bank Account (UGX)</p>
-          <p id="bank-info" class="text-sm opacity-80">
-            Sanyu Hospital Outreach - {{banks.account_number}} - {{banks.name}}
-          </p>
-          <p>swift code:  {{banks.name}} ibna:  {{banks.name}}</p>
-        </div>
-        <button class="btn btn-sm btn-outline btn-primary" onclick="copyText('bank-info')">
-          Copy
-        </button>
+  <div class="bg-gradient-to-tr from-yellow-100 via-pink-100 to-orange-100 rounded-3xl shadow-2xl p-8 border border-pink-200 flex flex-col md:flex-row justify-between items-start md:items-center">
+    <div class="mb-6 md:mb-0">
+      <h3 class="font-bold text-xl text-base-content mb-2">Bank Account (UGX)</h3>
+      <div class="grid grid-cols-1 sm:grid-cols-2 gap-y-2 gap-x-6 text-base">
+        <p><strong>Bank Name:</strong> {{banks.name}}</p>
+        <p id="bank-account-name"><strong>Account Name:</strong> Sanyu Hospital Outreach</p>
+        <p><strong>Account Number:</strong> {{banks.account_number}}</p>
+        <p><strong>SWIFT Code:</strong> {{banks.swift_code}}</p>
+        <p class="col-span-1 sm:col-span-2"><strong>Bank Address:</strong> {{banks.address}}</p>
       </div>
     </div>
+    <button class="btn btn-primary btn-md" onclick="copyText('bank-account-name')">
+      Copy Account Name
+    </button>
+  </div>
+</div>
+
+<script>
+  function copyText(elementId) {
+    const element = document.getElementById(elementId);
+    if (element) {
+      const textToCopy = element.textContent.replace('Account Name:', '').trim(); // Clean up text for copying
+      navigator.clipboard.writeText(textToCopy)
+        .then(() => {
+          alert('Account name copied to clipboard!');
+        })
+        .catch(err => {
+          console.error('Failed to copy text: ', err);
+        });
+    }
+  }
+</script>
 
   </div>
   <br>
