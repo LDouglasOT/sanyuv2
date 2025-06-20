@@ -94,11 +94,17 @@ WSGI_APPLICATION = 'sanyu.wsgi.application'
 # }
 
 DATABASES = {
-    'default': dj_database_url.config(
-        default='postgresql://sanyu:sanyu@localhost:5432/sanyu',    
-        conn_max_age=600,
-    )
+    'default': {
+        'ENGINE': 'django.db.backends.postgresql',
+        'NAME': 'sanyu',
+        'USER': 'sanyu',
+        'PASSWORD': 'sanyu',
+        'HOST': 'localhost',
+        'PORT': '5432',
+        'CONN_MAX_AGE': 600,
+    }
 }
+
 
 
 # Password validation
