@@ -95,7 +95,8 @@ WSGI_APPLICATION = 'sanyu.wsgi.application'
 
 DATABASES = {
     'default': dj_database_url.config(
-        default=os.getenv('DATABASE_URL'),
+        # default=os.getenv('DATABASE_URL'),
+        default='postgresql://sanyu:sanyu@localhost:5432/sanyu',    
         conn_max_age=600,
         ssl_require=True
     )
