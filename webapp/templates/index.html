@@ -239,7 +239,7 @@
     <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-8">
       {% for facility in facilities %}
       <div class="bg-white rounded-lg shadow-md overflow-hidden transform transition hover:scale-105">
-        {% if facility.image %}
+        {% if facility.image_url %}
           <img src="{{ facility.image_url }}" alt="{{ facility.title }}" class="w-full h-48 object-cover">
         {% else %}
           <div class="w-full h-48 bg-gray-200 flex items-center justify-center text-gray-400">
