@@ -240,7 +240,7 @@
       {% for facility in facilities %}
       <div class="bg-white rounded-lg shadow-md overflow-hidden transform transition hover:scale-105">
         {% if facility.image %}
-          <img src="{{ facility.image.url }}" alt="{{ facility.title }}" class="w-full h-48 object-cover">
+          <img src="{{ facility.image_url }}" alt="{{ facility.title }}" class="w-full h-48 object-cover">
         {% else %}
           <div class="w-full h-48 bg-gray-200 flex items-center justify-center text-gray-400">
             No Image
