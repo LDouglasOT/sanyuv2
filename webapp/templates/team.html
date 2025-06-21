@@ -3,25 +3,47 @@
 {% block title %}Our Dedicated Team - Sanyu Hospital{% endblock %}
 
 {% block content %}
-<section class="py-12 bg-gray-50">
-    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        <h2 class="text-3xl font-extrabold text-gray-900 text-center mb-8">Meet Our Dedicated Team</h2>
-        <div class="grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
-            {% for doctor in doctors %}
-            <div class="bg-white shadow-lg rounded-2xl p-6 text-center">
-                {% if doctor.image %}
-                    <img src="{{ doctor.image_url }}" alt="{{ doctor.name }}" class="w-32 h-32 mx-auto rounded-full object-cover mb-4">
-                {% else %}
-                    <div class="w-32 h-32 mx-auto mb-4 bg-gray-200 rounded-full flex items-center justify-center text-gray-400">No Image</div>
-                {% endif %}
-                <h3 class="text-xl font-semibold text-gray-800">{{ doctor.name }}</h3>
-                <p class="text-indigo-600 font-medium">{{ doctor.position }}</p>
-                {% if doctor.bio %}
-                    <p class="mt-2 text-sm text-gray-600">{{ doctor.bio|truncatewords:25 }}</p>
-                {% endif %}
-            </div>
-            {% endfor %}
-        </div>
+
+<!-- Hero Section -->
+<!-- Hero Section -->
+<div
+  class="hero min-h-screen"
+  style="background-image: url(https://firebasestorage.googleapis.com/v0/b/twinbrook-12f84.appspot.com/o/WhatsApp%20Image%202025-06-20%20at%201.37.59%20AM.jpeg?alt=media&token=27c79929-6c6e-4bcb-99ee-3b86a9ff9a27);"
+>
+  <div class="hero-overlay"></div>
+  <div class="hero-content text-neutral-content text-center">
+    <div class="max-w-md">
+      <h1 class="mb-5 text-5xl font-bold">OUR DEDICATED TEAM</h1>
+      <p class="mb-5">
+        The heartbeat of Sanyu Hospital — passionate, professional, and purpose-driven.
+      </p>
     </div>
+  </div>
+</div>
+
+
+
+<!-- Team Section -->
+<section class="py-12 bg-gray-50">
+  <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+    <h2 class="text-3xl font-extrabold text-gray-900 text-center mb-8">Meet Our Dedicated Team</h2>
+    <div class="grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
+      {% for doctor in doctors %}
+      <div class="bg-white shadow-lg rounded-2xl p-6 text-center">
+        {% if doctor.image %}
+          <img src="{{ doctor.image_url }}" alt="{{ doctor.name }}" class="w-60 h-60 mx-auto rounded-full object-cover mb-4">
+        {% else %}
+          <div class="w-32 h-32 mx-auto mb-4 bg-gray-200 rounded-full flex items-center justify-center text-gray-400">No Image</div>
+        {% endif %}
+        <h3 class="text-xl font-semibold text-gray-800">{{ doctor.name }}</h3>
+        <p class="text-indigo-600 font-medium">{{ doctor.position }}</p>
+        {% if doctor.bio %}
+          <p class="mt-2 text-sm text-gray-600">{{ doctor.bio|truncatewords:25 }}</p>
+        {% endif %}
+      </div>
+      {% endfor %}
+    </div>
+  </div>
 </section>
+
 {% endblock %}
