@@ -29,7 +29,9 @@ SECRET_KEY = 'django-insecure-9)u%q@$$7_nf1_ak6f_7krh1c3z)0z7lpwenajuk2c_-$s_b1p
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = ["*"]
+ALLOWED_HOSTS = ['sanyuhospital.org', 'www.sanyuhospital.org']
+
+
 
 USE_X_FORWARDED_HOST = True
 USE_X_FORWARDED_PORT = True
