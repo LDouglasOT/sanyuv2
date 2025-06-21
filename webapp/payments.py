@@ -11,8 +11,8 @@ def get_pesapal_token():
 
     url = "https://pay.pesapal.com/v3/api/Auth/RequestToken" 
     payload = {
-        "consumer_key": os.environ.get("PESAPAL_CONSUMER_KEY"),
-        "consumer_secret":os.environ.get("PESAPAL_CONSUMER_SECRET"),
+        "consumer_key": "OeLYRzifqADNX9wwoPlSe4IS6h+bk83O",
+        "consumer_secret":"x4nF7ng1QyQzQUnOvotCTVxFfQc=",
     }
     print(payload)
     print(url)
@@ -20,7 +20,7 @@ def get_pesapal_token():
     return response.json()["token"] 
 
 def get_pesapal_ipn_url():
-    url = os.environ.get("PESA_PAL_IPN_URL")
+    url = "https://pay.pesapal.com/v3/api/URLSetup/RegisterIPN"
     payload = {
         "ipn_notification_type": "POST",
         "url": "https://yourdomain.com/pesapal/ipn",  # Replace with your actual IPN URL
@@ -46,6 +46,7 @@ def submit_pesapal_order(request):
             print("transaction started..........................................")
         
             userdata = json.loads(request.body)
+            print(f"User data received: {userdata}")
             merchant_reference = str(uuid.uuid4())
 
             api_url = "https://pay.pesapal.com/v3/api/Transactions/SubmitOrderRequest"
