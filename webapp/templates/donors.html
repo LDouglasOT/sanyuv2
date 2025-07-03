@@ -20,7 +20,7 @@
       </h2>
       <p class="text-gray-700">💰 Donated <strong>{{ top_donor.amount }}</strong> {{ top_donor.currency }} via {{ top_donor.payment_method }}</p>
       {% if top_donor.reason %}
-        <p class="mt-2 italic text-sm text-gray-600">“{{ top_donor.reason }}”</p>
+        <p class="mt-2 italic text-sm text-gray-600">“{{ top_donor.reason|safe }}”</p>
       {% endif %}
     </div>
   {% endif %}
@@ -35,7 +35,7 @@
         <div class="text-xl font-bold text-blue-600 mt-1">💵 {{ donor.amount }} {{ donor.currency }}</div>
         <p class="text-sm text-gray-700 mt-1">💳 via {{ donor.payment_method }}</p>
         {% if donor.reason %}
-          <p class="text-xs italic text-gray-500 mt-2">“{{ donor.reason }}”</p>
+          <p class="text-xs italic text-gray-500 mt-2">“{{ donor.reason|safe }}”</p>
         {% endif %}
       </div>
     {% empty %}

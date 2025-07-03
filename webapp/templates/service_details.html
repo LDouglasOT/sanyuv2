@@ -18,7 +18,7 @@
 
       <!-- Content -->
       <div class="prose max-w-none text-gray-700">
-        <p>{{ service.description }}</p>
+        <p>{{ service.description|safe }}</p>
         <!-- If you add a full body field later, replace with: {{ service.body|linebreaks }} -->
       </div>
 

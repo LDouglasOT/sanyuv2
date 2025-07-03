@@ -18,7 +18,7 @@
 
       <!-- Content -->
       <div class="prose max-w-none text-gray-700">
-        <p>{{ knowledgebase.content }}</p>
+        <p>{{ knowledgebase.content|safe  }}</p>
         <!-- If you add a full body field later, replace with: {{ knowledgebase.body|linebreaks }} -->
       </div>
 

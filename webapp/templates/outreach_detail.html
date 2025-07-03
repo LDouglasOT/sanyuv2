@@ -15,7 +15,7 @@
         <img src="{{ outreach.image_url }}" alt="Outreach Image" class="rounded-xl shadow-md w-full object-cover">
       </div>
       <div class="md:w-1/2 flex flex-col justify-center">
-        <p class="text-lg text-gray-700 leading-relaxed">{{ outreach.description }}</p>
+        <p class="text-lg text-gray-700 leading-relaxed">{{ outreach.description|safe }}</p>
 
         {% if outreach.video_link %}
         <div class="mt-6">
@@ -44,7 +44,7 @@
     <!-- Testimonial -->
     {% if outreach.testimonial %}
     <div class="bg-yellow-50 border-l-4 border-yellow-400 p-6 mb-12 rounded-xl">
-      <p class="italic text-gray-800">"{{ outreach.testimonial }}"</p>
+      <p class="italic text-gray-800">"{{ outreach.testimonial|safe }}"</p>
     </div>
     {% endif %}
 

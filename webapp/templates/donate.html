@@ -69,7 +69,7 @@
           <p class="text-sm text-green-700 mb-4 flex items-center gap-1">
             👤 Team Lead: <span class="font-semibold text-green-900 ml-1">{{ outreach.team_lead }}</span>
           </p>
-          <p class="text-md text-green-800 mb-6 leading-relaxed">{{ outreach.description }}</p>
+          <p class="text-md text-green-800 mb-6 leading-relaxed">{{ outreach.description|safe }}</p>
  <p class="flex items-center gap-2 text-green-700">📍 <strong>Location: {{ outreach.location }}</strong> </p>
  <br>
           <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4 text-sm text-green-700">
