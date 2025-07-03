@@ -378,8 +378,9 @@ def partners_page(request):
 
 def knowledge_base(request,id):
     knowledge_base   = knowledgebase.objects.filter(category=id)
+    category = KnowledgeCategory.objects.get(id=id)
     print(knowledge_base)
-    return render(request, 'Knowledge.html', {'knowledge_base': knowledge_base})
+    return render(request, 'Knowledge.html', {'knowledge_base': knowledge_base,'title':category.title})
 
 
 from  .models import knowledgebase, Comment
