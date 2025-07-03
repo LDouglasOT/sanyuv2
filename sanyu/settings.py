@@ -110,7 +110,17 @@ DATABASES = {
     }
 }
 
-
+CKEDITOR_CONFIGS = {
+    'default': {
+        'toolbar': [
+            ['Source', '-', 'Bold', 'Italic', 'Underline', 'Strike', '-', 'Subscript', 'Superscript', '-', 'RemoveFormat', '-', 'NumberedList', 'BulletedList', '-', 'Outdent', 'Indent', '-', 'Blockquote', '-', 'Link', 'Unlink', '-', 'Image', 'CodeSnippet', 'Table', '-', 'Font', 'FontSize', 'TextColor', 'BGColor', '-', 'Styles', 'Format', 'AlignLeft', 'AlignCenter', 'AlignRight', 'Justify', '-', 'Undo', 'Redo', '-', 'Maximize', '-', 'ShowBlocks'],
+        ],
+        'toolbarCanCollapse': True,
+        'width': 'auto',
+        'height': 300,
+        'extraPlugins': ['liststyle'],  # Enable list plugin
+    },
+}
 
 # Password validation
 # https://docs.djangoproject.com/en/5.2/ref/settings/#auth-password-validators
