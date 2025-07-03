@@ -110,6 +110,7 @@ DATABASES = {
     }
 }
 
+
 CKEDITOR_CONFIGS = {
     'default': {
         'toolbar': [
@@ -118,9 +119,17 @@ CKEDITOR_CONFIGS = {
         'toolbarCanCollapse': True,
         'width': 'auto',
         'height': 300,
-        'extraPlugins': ['liststyle'],  # Enable list plugin
+        'extraPlugins': ','.join([
+            'div', 'autolink', 'autoembed', 'embedsemantic', 'autogrow',
+            'widget', 'lineutils', 'clipboard', 'dialog', 'dialogui', 'elementspath'
+        ]),
+        'contentsCss': [
+            '/static/ckeditor/contents.css',  # Important: default CKEditor CSS
+            '/static/css/custom_ckeditor.css',  # Optional: your own styles
+        ],
     },
 }
+
 
 # Password validation
 # https://docs.djangoproject.com/en/5.2/ref/settings/#auth-password-validators
