@@ -52,7 +52,7 @@ def upload_image_to_firebase(image_file, folder="outreach_images"):
 class MedicalOutreach(models.Model):
     title = models.CharField(max_length=255)
     team_lead = models.CharField(max_length=255)
-    description = models.TextField()
+    description = RichTextField(null=True, blank=True)
     status = models.BooleanField(default=False)  # True if completed, False if ongoing
     image = models.ImageField(upload_to='temp/')  # temporary local path
     image_url = models.URLField(blank=True)
@@ -66,7 +66,7 @@ class MedicalOutreach(models.Model):
     # Patients Treated
     patients_treated = models.PositiveIntegerField()
     total_cost = models.DecimalField(max_digits=12, decimal_places=2)
-    testimonial = models.TextField(blank=True, null=True)
+    testimonial = RichTextField(null=True, blank=True)
 
     # Media & Links
     video_link = models.URLField(blank=True, null=True)
@@ -126,7 +126,7 @@ class Doctor(models.Model):
     position = models.CharField(max_length=100)
     image = models.ImageField(upload_to='doctors/', blank=True, null=True)
     image_url = models.URLField(blank=True)
-    bio = models.TextField(blank=True, null=True)
+    bio = RichTextField(null=True, blank=True)
     message=RichTextField(null=True, blank=True)
     def __str__(self):
         return f"{self.name} - {self.position}"
@@ -139,7 +139,7 @@ class Doctor(models.Model):
 
 class Facility(models.Model):
     title = models.CharField(max_length=255)
-    description = models.TextField()
+    description = RichTextField(null=True, blank=True)
     image = models.ImageField(upload_to='facilities/')
     message = RichTextField(null=True, blank=True)
     image_url = models.URLField(blank=True)
@@ -292,7 +292,7 @@ class Payments(models.Model):
     callback_url = models.URLField(blank=True, null=True, help_text="URL to redirect after payment")
     notification_id = models.CharField(max_length=100, blank=True, null=True, help_text="Notification ID for IPN setup")
     merchant_reference = models.CharField(max_length=100, unique=True, blank=True, null=True, help_text="Unique reference for the merchant")
-    reason = models.TextField(blank=True, null=True, help_text="Reason for the payment, e.g. 'Donation', 'Service Payment'")
+    reason = RichTextField(null=True, blank=True)
     currency = models.CharField(max_length=10, default='USD', help_text="Currency for the payment, e.g. 'USD', 'EUR'")
     def save(self, *args, **kwargs):
         if not self.transaction_id:
