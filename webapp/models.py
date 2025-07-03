@@ -1,4 +1,5 @@
 from django.db import models
+from ckeditor.fields import RichTextField
 
 
 # Create your models here.
@@ -8,7 +9,7 @@ class news(models.Model):
     max_length=200,
     default="News title"
    )
-   news_script = models.CharField(max_length=2000, default="News...")
+   news_script = RichTextField(null=True, blank=True)
 
 class services(models.Model):
 
@@ -94,7 +95,7 @@ class Donor(models.Model):
     email = models.EmailField(blank=True, null=True)
     phone = models.CharField(max_length=20, blank=True, null=True)
     country = models.CharField(max_length=100, blank=True, null=True)
-    message = models.TextField(blank=True, null=True)
+    message = RichTextField(null=True, blank=True)
     anonimity = models.BooleanField(default=False, help_text="Check if you want to remain anonymous")
     
     outreach = models.ForeignKey(
@@ -126,7 +127,7 @@ class Doctor(models.Model):
     image = models.ImageField(upload_to='doctors/', blank=True, null=True)
     image_url = models.URLField(blank=True)
     bio = models.TextField(blank=True, null=True)
-
+    message=RichTextField(null=True, blank=True)
     def __str__(self):
         return f"{self.name} - {self.position}"
 
@@ -140,7 +141,7 @@ class Facility(models.Model):
     title = models.CharField(max_length=255)
     description = models.TextField()
     image = models.ImageField(upload_to='facilities/')
-
+    message = RichTextField(null=True, blank=True)
     image_url = models.URLField(blank=True)
     def save(self, *args, **kwargs):
         if self.image and not self.image_url:
@@ -153,7 +154,7 @@ class Facility(models.Model):
 
 class NewsItem(models.Model):
     title = models.CharField(max_length=255)
-    summary = models.TextField()
+    summary = RichTextField(null=True, blank=True)
     image_url = models.URLField(blank=True, null=True)
     slug = models.SlugField(unique=True)
     created_at = models.DateTimeField(auto_now_add=True)
@@ -174,7 +175,7 @@ class NewsItem(models.Model):
 
 class Service(models.Model):
     title = models.CharField(max_length=100)
-    description = models.TextField()
+    description = RichTextField(null=True, blank=True)
     icon = models.CharField(max_length=100, default="fas fa-heartbeat", help_text="Font Awesome class, e.g. 'fas fa-heartbeat'")
     image = models.ImageField(upload_to='services/', null=True, blank=True)
     image_url = models.URLField(blank=True, null=True)
@@ -208,7 +209,7 @@ class Speciality(models.Model):
     label = models.CharField(max_length=255)
     image = models.ImageField(upload_to='specialities/', null=True, blank=True)
     image_url = models.URLField(blank=True, null=True)  
-    description = models.TextField(blank=True, null=True)
+    description = RichTextField(null=True, blank=True)
     is_active = models.BooleanField(default=True, help_text="Is this speciality currently active?")
     pageviews = models.PositiveIntegerField(default=0, help_text="Number of times this speciality has been viewed")
     def increment_views(self):
@@ -250,7 +251,7 @@ from django.db import models
 
 class Event(models.Model):
     title = models.CharField(max_length=255)
-    description = models.TextField(blank=True)
+    description = RichTextField(null=True, blank=True)
     date = models.DateField()
     location = models.CharField(max_length=255)
     video_url = models.URLField(blank=True, null=True)  # For past events video link (YouTube etc.)
@@ -304,7 +305,7 @@ class Payments(models.Model):
 
 class Departments(models.Model):
     name = models.CharField(max_length=255)
-    description = models.TextField(blank=True, null=True)
+    description = RichTextField(null=True, blank=True)
     image = models.ImageField(upload_to='departments/', null=True, blank=True)
     image_url = models.URLField(blank=True, null=True)
 
@@ -334,14 +335,14 @@ class Partner(models.Model):
     logo = models.ImageField(upload_to='partners/logos/')
     website = models.URLField(max_length=200)
     partner_type = models.CharField(max_length=4, choices=PARTNER_TYPES)
-
+    message = RichTextField(null=True, blank=True)
     def __str__(self):
         return self.name
 
 
 class knowledgebase(models.Model):
     title = models.CharField(max_length=255)
-    content = models.TextField()
+    content = RichTextField(null=True, blank=True)
     image = models.ImageField(upload_to='knowledgebase/', null=True, blank=True)
     image_url = models.URLField(blank=True, null=True)
     created_at = models.DateTimeField(auto_now_add=True)
@@ -361,7 +362,7 @@ class knowledgebase(models.Model):
 
 class Comment(models.Model):
     knowledgebase = models.ForeignKey('KnowledgeBase', on_delete=models.CASCADE, related_name='comments')
-    content = models.TextField()
+    content = RichTextField(null=True, blank=True)
     created_at = models.DateTimeField(auto_now_add=True)
 
     def __str__(self):

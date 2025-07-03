@@ -5,6 +5,7 @@ certifi==2025.4.26
 cffi==1.17.1
 cryptography==45.0.3
 dj-database-url==2.2.0
+django-ckeditor>=6.0.0
 Django==5.1
 django-pesapal==2.0
 django-storages==1.14.6
