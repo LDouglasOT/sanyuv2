@@ -18,13 +18,14 @@ admin.site.register(BankDs, ModelAdmin)
 admin.site.register(Service)
 admin.site.register(Speciality)
 admin.site.register(Slide)
-
+admin.site.register(KnowledgeCategory)
 admin.site.register(Event)
 admin.site.register(Payments)
 admin.site.register(Departments)
 admin.site.register(Partner)
 admin.site.register(knowledgebase)
 @admin.register(Facility)
+
 
 class FacilityAdmin(admin.ModelAdmin):
     list_display = ('title',)

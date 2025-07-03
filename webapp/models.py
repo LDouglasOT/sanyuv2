@@ -340,6 +340,24 @@ class Partner(models.Model):
         return self.name
 
 
+class KnowledgeCategory(models.Model):
+    title = models.CharField(max_length=255)
+    description = models.TextField(null=True, blank=True)
+    created_at = models.DateTimeField(auto_now_add=True)
+    image = models.ImageField(upload_to='icons/', null=True, blank=True)
+    icon = models.URLField(blank=True, null=True)
+
+    def __str__(self):
+        return self.name
+
+    def save(self, *args, **kwargs):
+        if self.image and not self.icon:
+            self.icon = upload_image_to_firebase(self.image)
+        super().save(*args, **kwargs)
+
+    def __str__(self):
+        return self.title
+
 class knowledgebase(models.Model):
     title = models.CharField(max_length=255)
     content = RichTextField(null=True, blank=True)
@@ -347,6 +365,9 @@ class knowledgebase(models.Model):
     image_url = models.URLField(blank=True, null=True)
     created_at = models.DateTimeField(auto_now_add=True)
     pageviews = models.PositiveIntegerField(default=0, help_text="Number of times this knowledge base article has been viewed")
+
+    category = models.ForeignKey(KnowledgeCategory, related_name='knowledge_articles', on_delete=models.CASCADE,null=True,blank=True)
+
     def increment_views(self):
         self.pageviews += 1
         self.save()

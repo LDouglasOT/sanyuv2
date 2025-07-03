@@ -156,7 +156,7 @@ body, html, * {
           <a href="{% url 'contact' %}" class="btn btn-outline btn-sm">Contact</a>
            <a href="{% url 'get_donors' %}" class="btn btn-outline btn-sm">Our donors</a>
           
-          <a href="{% url 'knowledge_page' %}" class="btn btn-outline btn-sm">health challenges</a>
+          <a href="{% url 'special-knowledge-categories' %}" class="btn btn-outline btn-sm">health challenges</a>
 
         </div>
       </div>
@@ -183,7 +183,7 @@ body, html, * {
     tabindex="0"
     class="dropdown-content card card-sm bg-base-100 z-10 w-64 shadow-md">
     <div class="card-body">
-       <li><a href="{% url 'knowledge_page' %}" class="hover:text-green-800 hover:font-bold {% if request.path == '/knowledge/' %}bg-green-700 text-white{% endif %} active:bg-green-600 px-3 py-2 rounded"> health challenges </a></li>
+       <li><a href="{% url 'special-knowledge-categories' %}" class="hover:text-green-800 hover:font-bold {% if request.path == '/knowledge/' %}bg-green-700 text-white{% endif %} active:bg-green-600 px-3 py-2 rounded"> health challenges </a></li>
     <li><a href="{% url 'about' %}" class="hover:text-green-800 hover:font-bold {% if request.path == '/about/' %}bg-green-700 text-white{% endif %} active:bg-green-600 px-3 py-2 rounded">About</a></li>
      <li><a href="{% url 'partners_page' %}" class="hover:text-green-800 hover:font-bold {% if request.path == '/partners/' %}bg-green-700 text-white{% endif %} active:bg-green-600 px-3 py-2 rounded">Partners</a></li>
      <li><a href="{% url 'contact' %}" class="hover:text-green-800 hover:font-bold {% if request.path == '/contact/' %}bg-green-700 text-white{% endif %} active:bg-green-600 px-3 py-2 rounded">Contact</a></li>
@@ -221,7 +221,7 @@ body, html, * {
   <li><a href="{% url 'donate' %}" class="hover:text-green-800 hover:font-bold {% if request.path == '/donate/' %}bg-green-700 text-white{% endif %} active:bg-green-600 px-3 py-2 rounded">Missions</a></li>
  <li><a href="{% url 'services' %}" class="hover:text-green-800 hover:font-bold {% if request.path == '/services/' %}bg-green-700 text-white{% endif %} active:bg-green-600 px-3 py-2 rounded">Services</a></li>
   <li><a href="{% url 'partners_page' %}" class="hover:text-green-800 hover:font-bold {% if request.path == '/partners/' %}bg-green-700 text-white{% endif %} active:bg-green-600 px-3 py-2 rounded">Partners</a></li>
-  <li><a href="{% url 'knowledge_page' %}" class="hover:text-green-800 hover:font-bold {% if request.path == '/knowledge/' %}bg-green-700 text-white{% endif %} active:bg-green-600 px-3 py-2 rounded">Common health challenges in community</a></li>
+  <li><a href="{% url 'special-knowledge-categories' %}" class="hover:text-green-800 hover:font-bold {% if request.path == '/knowledge/' %}bg-green-700 text-white{% endif %} active:bg-green-600 px-3 py-2 rounded">Common health challenges in community</a></li>
   <li><a href="{% url 'about' %}" class="hover:text-green-800 hover:font-bold {% if request.path == '/about/' %}bg-green-700 text-white{% endif %} active:bg-green-600 px-3 py-2 rounded">About</a></li>
     <li><a href="{% url 'contact' %}" class="hover:text-green-800 hover:font-bold {% if request.path == '/contact/' %}bg-green-700 text-white{% endif %} active:bg-green-600 px-3 py-2 rounded">Contact</a></li>
     <li><a href="{% url 'get_donors' %}" class="hover:text-green-800 hover:font-bold {% if request.path == '/our-donors/' %}bg-green-700 text-white{% endif %} active:bg-green-600 px-3 py-2 rounded">Our donors</a></li>

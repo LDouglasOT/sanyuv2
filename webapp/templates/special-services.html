@@ -1,0 +1,58 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<br>
+<div class="max-w-6xl mx-auto">
+    <h1 class="text-3xl font-bold text-center mb-10">Medical Services</h1>
+    
+    {% if services %}
+    <div class="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 gap-6">
+        {% for service in services %}
+        <a href="{% url 'knowledge_page' service.id %}"  class="service-card bg-white rounded-2xl shadow p-6 text-center hover:shadow-lg transition transform hover:scale-105 cursor-pointer">
+            <img src="{{ service.icon }}" alt="{{ service.title }}" class="mx-auto h-12 mb-4">
+           <h4 class="text-green-700 font-medium"><strong>{{ service.title }} </strong> </h4>
+        </a>
+        {% endfor %}
+    </div>
+    {% else %}
+    <div class="text-center text-gray-500">
+        <p>No services are available at the moment. Please check back later.</p>
+    </div>
+    {% endif %}
+</div>
+<br>
+<br>
+
+<style>
+    .service-card {
+        position: relative;
+        overflow: hidden;
+        transition: background-color 0.3s ease, transform 0.3s ease;
+    }
+
+    .service-card:hover {
+        background-color: #6EE7B7; /* Light green color for hover */
+        transform: scale(1.05);  /* Slightly scale the card on hover */
+        box-shadow: 0 4px 20px rgba(0, 0, 0, 0.15); /* Increase the shadow on hover */
+    }
+
+    .service-card::before {
+        content: "";
+        position: absolute;
+        top: 0;
+        left: 0;
+        right: 0;
+        bottom: 0;
+        background-color: #4ADE80; /* Set initial hover color */
+        z-index: -1;
+        transition: transform 0.3s ease-in-out;
+        transform: scaleX(0); /* Initially, no color fill */
+        transform-origin: right;
+    }
+
+    .service-card:hover::before {
+        transform: scaleX(1); /* Fill the entire card on hover */
+        transform-origin: left;
+    }
+</style>
+{% endblock %}

@@ -3,7 +3,7 @@ from django import forms
 from django.shortcuts import get_object_or_404, render
 from django.shortcuts import render, redirect
 from django.contrib import messages
-from .models import Departments, Facility, Event, Partner, Payments, knowledgebase
+from .models import Departments, Facility, Event, KnowledgeCategory, Partner, Payments, knowledgebase
 from .payments import *
 
 from django.shortcuts import redirect, render
@@ -17,6 +17,37 @@ from .models import BankDs, NewsItem, Slide, Speciality
 # Create your views here.
 import json
 from django.core.serializers.json import DjangoJSONEncoder
+
+def special_knowledge_categories(request):
+    services = [
+        {"name": "Anesthesia", "icon": "https://img.icons8.com/external-flaticons-lineal-color-flat-icons/64/external-anesthesia-plastic-surgery-flaticons-lineal-color-flat-icons.png"},
+        {"name": "Cardiology", "icon": "https://img.icons8.com/external-flaticons-lineal-color-flat-icons/64/external-anesthesia-plastic-surgery-flaticons-lineal-color-flat-icons.png"},
+        {"name": "Cardiovascular", "icon": "https://img.icons8.com/external-flaticons-lineal-color-flat-icons/64/external-anesthesia-plastic-surgery-flaticons-lineal-color-flat-icons.png"},
+        {"name": "Chiropractic", "icon": "https://img.icons8.com/external-flaticons-lineal-color-flat-icons/64/external-anesthesia-plastic-surgery-flaticons-lineal-color-flat-icons.png"},
+        {"name": "Dentistry", "icon": "https://img.icons8.com/external-flaticons-lineal-color-flat-icons/64/external-anesthesia-plastic-surgery-flaticons-lineal-color-flat-icons.png"},
+        {"name": "Dermatology", "icon": "https://img.icons8.com/external-flaticons-lineal-color-flat-icons/64/external-anesthesia-plastic-surgery-flaticons-lineal-color-flat-icons.png"},
+        {"name": "Diabetology & Endocrinology", "icon": "https://img.icons8.com/external-flaticons-lineal-color-flat-icons/64/external-anesthesia-plastic-surgery-flaticons-lineal-color-flat-icons.png"},
+        {"name": "Ear, Nose & Throat (ENT)", "icon": "https://img.icons8.com/external-flaticons-lineal-color-flat-icons/64/external-anesthesia-plastic-surgery-flaticons-lineal-color-flat-icons.png"},
+        {"name": "Emergency & Critical Care", "icon": "https://img.icons8.com/external-flaticons-lineal-color-flat-icons/64/external-anesthesia-plastic-surgery-flaticons-lineal-color-flat-icons.png"},
+        {"name": "Emergency Ambulance Service", "icon": "https://img.icons8.com/external-flaticons-lineal-color-flat-icons/64/external-anesthesia-plastic-surgery-flaticons-lineal-color-flat-icons.png"},
+        {"name": "Gastroenterology", "icon": "https://img.icons8.com/external-flaticons-lineal-color-flat-icons/64/external-anesthesia-plastic-surgery-flaticons-lineal-color-flat-icons.png"},
+        {"name": "General & Laparoscopic Surgery", "icon": "https://img.icons8.com/external-flaticons-lineal-color-flat-icons/64/external-anesthesia-plastic-surgery-flaticons-lineal-color-flat-icons.png"},
+        {"name": "General Medicine", "icon": "https://img.icons8.com/external-flaticons-lineal-color-flat-icons/64/external-anesthesia-plastic-surgery-flaticons-lineal-color-flat-icons.pngicons/medicine.svg"},
+        {"name": "General Surgeon", "icon": "https://img.icons8.com/external-flaticons-lineal-color-flat-icons/64/external-anesthesia-plastic-surgery-flaticons-lineal-color-flat-icons.png"},
+        {"name": "Geriatrics (Aged Care)", "icon": "https://img.icons8.com/external-flaticons-lineal-color-flat-icons/64/external-anesthesia-plastic-surgery-flaticons-lineal-color-flat-icons.png"},
+        {"name": "Internal Medicine", "icon": "https://img.icons8.com/external-flaticons-lineal-color-flat-icons/64/external-anesthesia-plastic-surgery-flaticons-lineal-color-flat-icons.png"},
+        {"name": "Kinesitherapy Services", "icon": "https://img.icons8.com/external-flaticons-lineal-color-flat-icons/64/external-anesthesia-plastic-surgery-flaticons-lineal-color-flat-icons.png"},
+        {"name": "Medical Officer", "icon": "https://img.icons8.com/external-flaticons-lineal-color-flat-icons/64/external-anesthesia-plastic-surgery-flaticons-lineal-color-flat-icons.png"},
+        {"name": "Nephrology", "icon": "https://img.icons8.com/external-flaticons-lineal-color-flat-icons/64/external-anesthesia-plastic-surgery-flaticons-lineal-color-flat-icons.png"},
+        {"name": "Neurology & Neurosurgery", "icon": "https://img.icons8.com/external-flaticons-lineal-color-flat-icons/64/external-anesthesia-plastic-surgery-flaticons-lineal-color-flat-icons.png"},
+    ]
+    services = KnowledgeCategory.objects.all()
+
+    return render(request, "special-services.html", {"services": services})
+
+
+
+
 
 def events(request):
     # Assuming you have a model for events, fetch them here
@@ -345,10 +376,11 @@ def partners_page(request):
     return render(request, 'partners_page.html', {})
 
 
-def knowledge_base(request):
-    knowledge_base   = knowledgebase.objects.all()
+def knowledge_base(request,id):
+    knowledge_base   = knowledgebase.objects.filter(category=id)
     print(knowledge_base)
     return render(request, 'Knowledge.html', {'knowledge_base': knowledge_base})
+
 
 from  .models import knowledgebase, Comment
 
