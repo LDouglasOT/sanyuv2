@@ -9,7 +9,7 @@
     <div class="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 gap-6">
         {% for service in services %}
         <a href="{% url 'knowledge_page' service.id %}"  class="service-card bg-white rounded-2xl shadow p-6 text-center hover:shadow-lg transition transform hover:scale-105 cursor-pointer">
-            <img src="{{ service.icon }}" alt="{{ service.title }}" class="mx-auto h-12 mb-4">
+            <img src="{{ service.icon }}" alt="{{ service.title }}" class="mx-auto h-20 mb-4">
            <h4 class="text-green-700 font-medium"><strong>{{ service.title }} </strong> </h4>
         </a>
         {% endfor %}
