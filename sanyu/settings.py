@@ -50,6 +50,7 @@ INSTALLED_APPS = [
     'django_pesapal',
     'widget_tweaks',
     'diaspora',
+    'ckeditor',
 ]
 X_FRAME_OPTIONS = 'ALLOWALL'
 
